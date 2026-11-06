@@ -1,0 +1,42 @@
+# Ansys and simulation outputs
+*.aedt
+*.aedb/
+*.wbpj
+*.wbpj_files/
+*.mechdb
+*.cas
+*.dat
+*.ipynb_checkpoints/
+*.lock
+*.log
+*.out
+*.rst
+*.rth
+*.sim
+*.stp
+*.step
+*.sldprt
+*.sldasm
+*.slddrw
+*.wbpz
+*.msh
+*.mesh
+*.h5
+*.hdf5
+*.vtk
+*.vtu
+
+# Local secrets, environment, caches
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+__pycache__/
+.DS_Store
+Thumbs.db
+
+# User-specific scratch data
+30_AI_Workspace/Temporary_Data/**
+30_AI_Workspace/Scratch/**
+20_Projects/*/02_Results/Raw/**
