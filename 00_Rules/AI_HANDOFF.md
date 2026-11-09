@@ -10,15 +10,27 @@
 - 메시 수렴: 전역 0.5→0.25 mm에서 GPU peak 0.36°C 변화(<0.5°C 기준)로 수렴. 거친 1 mm는 ~1.7°C 낮게 나왔음. 기준 메시 = 전역 0.25 + die (0.5, 0.5, 0.02) mm.
 - 검증 결과: 수렴 메시에서 GPU peak 66.5°C(Run_008) vs 논문 69.1°C → −2.5°C. HBM base 56.2°C(−0.8°C). 열수지 574 W, residual ~1e-13.
 - 민감도: GPU 배경비율 10%p당 GPU peak ~2°C(Run_003=40%, Run_005=30%); die 영역 메시 영향 ~0.1°C; DRAM 본딩 복원은 HBM base만 ~1.7°C.
-- 환경 문제 규명: 이 PC(Intel UHD 730 내장그래픽, 4K, 260바디 모델)에서 AEDT **3D GUI 상호작용 시 크래시**(렉 후 종료). 라이선스 로그상 뜬 직후 재시작 반복, CHECKOUT은 정상 → 그래픽 한계일 뿐 솔브(CPU)·라이선스는 정상. 우회: 배치 실행 + 생성된 SVG/리포트로 확인. 이 때문에 원격 랩 PC로 이전 예정.
+- 환경 문제 규명: 이 PC(Intel UHD 730 내장그래픽, 4K, 260바디 모델)에서 AEDT **3D GUI 상호작용 시 크래시**(렉 후 종료). 라이선스 로그상 뜬 직후 재시작 반복, CHECKOUT은 정상 → 그래픽 한계일 뿐 솔브(CPU)·라이선스는 정상. 우회: 배치 실행 + 생성된 SVG/리포트로 확인. 이 때문에 원격 랩 PC로 이전함.
+
+## 검증 완료 (2026-11-09, Phase 1 = 문헌 검증)
+- 논문 원문(Dropbox `_Member/Hyeongjun/03_논문/ThermalAnalysis/Breaking_Thermal_Bottleneck...pdf`) 직접 확인 → GPU ≈32×20mm² 414W, HBM 11×11 12-Hi 40W/스택, 경계 h 30000/200·20°C, **2.5D GPU peak 69.1°C**(3D 141.7°C), 전력 공간맵은 비공개(총량만) — 전부 [A] 확정.
+- 스택업 수치가 논문 Fig.2(c)와 일치(두께·k·경계·전력총량) 대조 완료.
+- 수렴 메시 배경비율 민감도(원격 Run_008/009): BG50%→GPU peak **66.55°C**, BG30%→**71.08°C**. 논문 69.1°C를 브라켓, 보간 **BG≈39%**. HBM base는 배경비율 무관(56.2↔55.9).
+- **결론: −2.5°C 갭은 비공개 GPU 전력맵 가정으로 전부 설명됨(구조오류 아님). 베이스라인 검증 완료**, Phase 2의 기준으로 사용.
+- 원격 셔틀 구축: 이 PC→랩 PC(143.248.153.132, unist) **ssh 키 접속**으로 AEDT 배치를 자동 구동. 단 AEDT는 대화형 데스크톱 세션 필요 → 실행 트리거만 사용자가 RDP에서 수동(고정 한 줄 `run_next.ps1`). 상세는 메모리 `project-remote-aedt-shuttle`.
 
 ## 미완료 작업
 - lidless(힛스프레더 제거) 케이스 셋업. **미결 결정**: 공정 비교를 위한 상단 냉각 경계 모델링 — (a) 양쪽에 동일 콜드플레이트 솔리드 + 그 윗면 HTC, (b) 노출면에 직접 HTC. (a) 권장(냉각 면적 교란 제거), 아직 미확정.
 - lid/lidless 확정 후 **칩 크기 sweep**(지도교수 요청 결론 단계). 가설: 대형 AI 가속기에선 lidless가 냉각에 유리. **가정이 아니라 데이터로 검증할 대상.**
-- 수렴 메시 기준 배경비율 ~38% 재실행(69.1°C 정합 확인) — 미실행(외삽 추정만 있음).
-- 남은 2.5°C 원인 규명(GPU power map / lid·TIM 면적 / 논문 메시·솔버 후보).
-- 논문 PDF 원문에서 GPU 414 W·HBM 40 W/스택 [S] 재확인(현재 스크립트 표기 기반, 등급 [A]로 승격 필요).
-- 저장소 `20_Projects/P10_CoolingSimulation/Research_Log.md` 구체화(현재 스텁).
+- 소 불일치: 논문 본문 GPU 32×20 vs 모델 30×22(Fig.2a 기준, 면적 +3%) — Phase 2 이후 민감도.
+- `Research_Log.md` Phase 1 검증 기록 반영 완료(이후 계속 갱신).
+
+## 연구 계획 순서 (형준님, 2026-11-09)
+1. 기존 HBM 구조 시뮬 문헌 검증 — **완료**
+2. 힛스프레더 유무(lid vs lidless) 열효율 러프 비교 (TIM·HTC 고정) ← 다음
+3. 특정 발열조건에서 힛스프레더 면적·두께의 필요 수준
+4. 국소 핫스팟/die 최고온 상승 시 힛스프레더 유효성과 쿨링 한계 제시
+5. die 크기를 변수로 sweep (맨 마지막, 그래프 X축 ≥5점)
 
 ## 핵심 참고자료
 - 해석 파일(이 PC): `C:\AnsysSim\projects\P10_CoolingSimulation` — `Runs\Run_001..008`(각 `Model\hbm_gpu_2p5d.py`, `Model\*_report.txt`, `Export\summary.json`), `Documents\sensitivity_summary.txt`
@@ -27,4 +39,4 @@
 - HBM 전력 분배 출처: Son et al., EDAPS 2023 (logic die 전력 배치)
 
 ## 다음 AI용 프롬프트
-원격 랩 PC의 기존 작업 폴더에서 이어서 작업한다. 먼저 이 핸드오프와 `20_Projects/P10_CoolingSimulation/`를 읽는다. AEDT는 **배치(GUI 없이)**로 돌리고 결과는 SVG·리포트로 확인한다(원격 디스플레이에서 3D GUI는 느릴 수 있음). 다음 우선순위는 lidless 케이스의 상단 냉각 경계 모델링 방식을 사용자와 확정하는 것(권장: 양쪽 동일 콜드플레이트). 결론(lidless 유리)은 미리 확정하지 말고 칩 크기 sweep 데이터로 검증한다. 미확인·충돌 항목은 해결된 것처럼 쓰지 말고, 조사 근거는 프로젝트 `Research_Log.md`에도 남긴다.
+Phase 1(문헌 검증) 완료. 다음은 **Phase 2: 힛스프레더 유무(lid vs lidless) 비교**다. 실행은 이 PC에서 ssh로 원격 랩 PC를 셔틀로 쓴다(파일·결과 자동, AEDT 실행만 사용자가 RDP에서 `run_next.ps1` 트리거 — 메모리 `project-remote-aedt-shuttle` 참조). AEDT는 **배치(`ansysedt -ng -RunScriptAndExit`)**로만 돌린다. lidless 상단 냉각 경계는 **(a) 양쪽 동일 콜드플레이트 솔리드 + 그 윗면 HTC** 권장(냉각 면적 교란 제거). TIM·HTC 고정 후 lid 유무만 비교. 결론(lidless 유리)은 미리 단정하지 말고 **데이터로 검증**한다(칩 크기 sweep은 Phase 5, 그래프 X축 ≥5점). 미확인·충돌 항목은 해결된 것처럼 쓰지 말고, 조사 근거는 `Research_Log.md`에도 남긴다.
