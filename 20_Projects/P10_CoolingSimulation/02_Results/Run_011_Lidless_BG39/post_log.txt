@@ -1,0 +1,30 @@
+FAIL  mesh stats
+Traceback (most recent call last):
+  File "E:/0_DSIL_Member/Hyeongjun/Research/20_Projects/P10_CoolingSimulation/01_Simulation/Icepak/Runs/Run_011_Lidless_BG39/Model/driver_3_post.py", line 21, in step
+    r = fn()
+  File "E:/0_DSIL_Member/Hyeongjun/Research/20_Projects/P10_CoolingSimulation/01_Simulation/Icepak/Runs/Run_011_Lidless_BG39/Model/driver_3_post.py", line 70, in <lambda$93>
+    step("mesh stats", lambda: oDesign.ExportMeshStats("Setup1", "", os.path.join(EXPORT, "mesh_stats.txt")))
+AttributeError: 'ADispatchWrapper' object has no attribute 'ExportMeshStats'
+
+OK    profile  
+FAIL  convergence
+Traceback (most recent call last):
+  File "E:/0_DSIL_Member/Hyeongjun/Research/20_Projects/P10_CoolingSimulation/01_Simulation/Icepak/Runs/Run_011_Lidless_BG39/Model/driver_3_post.py", line 21, in step
+    r = fn()
+  File "E:/0_DSIL_Member/Hyeongjun/Research/20_Projects/P10_CoolingSimulation/01_Simulation/Icepak/Runs/Run_011_Lidless_BG39/Model/driver_3_post.py", line 72, in <lambda$95>
+    step("convergence", lambda: oDesign.ExportConvergence("Setup1", "", os.path.join(EXPORT, "convergence.txt")))
+AttributeError: 'ADispatchWrapper' object has no attribute 'ExportConvergence'
+
+FAIL first calc Lid
+Traceback (most recent call last):
+  File "E:/0_DSIL_Member/Hyeongjun/Research/20_Projects/P10_CoolingSimulation/01_Simulation/Icepak/Runs/Run_011_Lidless_BG39/Model/driver_3_post.py", line 83, in <module>
+    tx = calc(oFR, o["name"], "Maximum", tmp)
+  File "E:/0_DSIL_Member/Hyeongjun/Research/20_Projects/P10_CoolingSimulation/01_Simulation/Icepak/Runs/Run_011_Lidless_BG39/Model/driver_3_post.py", line 38, in calc
+    oFR.EnterVol(obj)
+Exception: EnterVol(string geomName)(Lid) - call failed. Logs or message window might have more details
+
+objects 260, calc failures 1
+OK    grid GPU  E:\0_DSIL_Member\Hyeongjun\Research\20_Projects\P10_CoolingSimulation\01_Simulation\Icepak\Runs\Run_011_Lidless_BG39\Export\T_GPU_BEOLMXY.fld exists=True
+OK    grid module  E:\0_DSIL_Member\Hyeongjun\Research\20_Projects\P10_CoolingSimulation\01_Simulation\Icepak\Runs\Run_011_Lidless_BG39\Export\T_Interposer_plane.fld exists=True
+OK    grid lid top  E:\0_DSIL_Member\Hyeongjun\Research\20_Projects\P10_CoolingSimulation\01_Simulation\Icepak\Runs\Run_011_Lidless_BG39\Export\T_LidTop.fld exists=True
+OK    grid lam bottom  E:\0_DSIL_Member\Hyeongjun\Research\20_Projects\P10_CoolingSimulation\01_Simulation\Icepak\Runs\Run_011_Lidless_BG39\Export\T_LamBottom.fld exists=True

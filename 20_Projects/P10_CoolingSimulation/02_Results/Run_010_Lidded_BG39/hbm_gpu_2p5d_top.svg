@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="760" viewBox="0 0 1240 760" font-family="sans-serif">
+<rect width="1240" height="760" fill="white"/>
+<text x="96" y="30" font-size="17" font-weight="bold">plan at z = 0.905 mm (mid DRAM stack) + all 20 heat blocks in red</text>
+<line x1="96.00" y1="96" x2="96.00" y2="664" stroke="#e8e8e8"/>
+<text x="96.00" y="680" font-size="11" fill="#555" text-anchor="middle">0</text>
+<line x1="224.92" y1="96" x2="224.92" y2="664" stroke="#e8e8e8"/>
+<text x="224.92" y="680" font-size="11" fill="#555" text-anchor="middle">10</text>
+<line x1="353.85" y1="96" x2="353.85" y2="664" stroke="#e8e8e8"/>
+<text x="353.85" y="680" font-size="11" fill="#555" text-anchor="middle">20</text>
+<line x1="482.77" y1="96" x2="482.77" y2="664" stroke="#e8e8e8"/>
+<text x="482.77" y="680" font-size="11" fill="#555" text-anchor="middle">30</text>
+<line x1="611.69" y1="96" x2="611.69" y2="664" stroke="#e8e8e8"/>
+<text x="611.69" y="680" font-size="11" fill="#555" text-anchor="middle">40</text>
+<line x1="740.62" y1="96" x2="740.62" y2="664" stroke="#e8e8e8"/>
+<text x="740.62" y="680" font-size="11" fill="#555" text-anchor="middle">50</text>
+<line x1="869.54" y1="96" x2="869.54" y2="664" stroke="#e8e8e8"/>
+<text x="869.54" y="680" font-size="11" fill="#555" text-anchor="middle">60</text>
+<line x1="96" y1="663.40" x2="934" y2="663.40" stroke="#e8e8e8"/>
+<text x="88" y="667.40" font-size="11" fill="#555" text-anchor="end">0</text>
+<line x1="96" y1="576.02" x2="934" y2="576.02" stroke="#e8e8e8"/>
+<text x="88" y="580.02" font-size="11" fill="#555" text-anchor="end">10</text>
+<line x1="96" y1="488.63" x2="934" y2="488.63" stroke="#e8e8e8"/>
+<text x="88" y="492.63" font-size="11" fill="#555" text-anchor="end">20</text>
+<line x1="96" y1="401.25" x2="934" y2="401.25" stroke="#e8e8e8"/>
+<text x="88" y="405.25" font-size="11" fill="#555" text-anchor="end">30</text>
+<line x1="96" y1="313.86" x2="934" y2="313.86" stroke="#e8e8e8"/>
+<text x="88" y="317.86" font-size="11" fill="#555" text-anchor="end">40</text>
+<line x1="96" y1="226.48" x2="934" y2="226.48" stroke="#e8e8e8"/>
+<text x="88" y="230.48" font-size="11" fill="#555" text-anchor="end">50</text>
+<line x1="96" y1="139.09" x2="934" y2="139.09" stroke="#e8e8e8"/>
+<text x="88" y="143.09" font-size="11" fill="#555" text-anchor="end">60</text>
+<rect x="321.62" y="283.88" width="386.77" height="192.25" fill="rgb(120,170,220)" stroke="#333" stroke-width="0.3"/>
+<rect x="179.80" y="380.87" width="139.24" height="94.38" fill="rgb(200,190,220)" stroke="#333" stroke-width="0.3"/>
+<rect x="179.80" y="380.87" width="139.24" height="94.38" fill="rgb(120,170,220)" stroke="#333" stroke-width="0.3"/>
+<rect x="179.80" y="284.75" width="139.24" height="94.38" fill="rgb(200,190,220)" stroke="#333" stroke-width="0.3"/>
+<rect x="179.80" y="284.75" width="139.24" height="94.38" fill="rgb(120,170,220)" stroke="#333" stroke-width="0.3"/>
+<rect x="710.96" y="380.87" width="139.24" height="94.38" fill="rgb(200,190,220)" stroke="#333" stroke-width="0.3"/>
+<rect x="710.96" y="380.87" width="139.24" height="94.38" fill="rgb(120,170,220)" stroke="#333" stroke-width="0.3"/>
+<rect x="710.96" y="284.75" width="139.24" height="94.38" fill="rgb(200,190,220)" stroke="#333" stroke-width="0.3"/>
+<rect x="710.96" y="284.75" width="139.24" height="94.38" fill="rgb(120,170,220)" stroke="#333" stroke-width="0.3"/>
+<rect x="166.91" y="275.14" width="12.89" height="209.72" fill="rgb(215,215,200)" stroke="#333" stroke-width="0.3"/>
+<rect x="179.80" y="475.25" width="139.24" height="9.61" fill="rgb(215,215,200)" stroke="#333" stroke-width="0.3"/>
+<rect x="179.80" y="379.13" width="139.24" height="1.75" fill="rgb(215,215,200)" stroke="#333" stroke-width="0.3"/>
+<rect x="179.80" y="275.14" width="139.24" height="9.61" fill="rgb(215,215,200)" stroke="#333" stroke-width="0.3"/>
+<rect x="319.04" y="275.14" width="2.58" height="209.72" fill="rgb(215,215,200)" stroke="#333" stroke-width="0.3"/>
+<rect x="321.62" y="476.12" width="386.77" height="8.74" fill="rgb(215,215,200)" stroke="#333" stroke-width="0.3"/>
+<rect x="321.62" y="275.14" width="386.77" height="8.74" fill="rgb(215,215,200)" stroke="#333" stroke-width="0.3"/>
+<rect x="708.38" y="275.14" width="2.58" height="209.72" fill="rgb(215,215,200)" stroke="#333" stroke-width="0.3"/>
+<rect x="710.96" y="475.25" width="139.24" height="9.61" fill="rgb(215,215,200)" stroke="#333" stroke-width="0.3"/>
+<rect x="710.96" y="379.13" width="139.24" height="1.75" fill="rgb(215,215,200)" stroke="#333" stroke-width="0.3"/>
+<rect x="710.96" y="275.14" width="139.24" height="9.61" fill="rgb(215,215,200)" stroke="#333" stroke-width="0.3"/>
+<rect x="850.20" y="275.14" width="12.89" height="209.72" fill="rgb(215,215,200)" stroke="#333" stroke-width="0.3"/>
+<rect x="163.68" y="272.95" width="702.63" height="214.09" fill="none" stroke="#d0d" stroke-width="1.6" stroke-dasharray="6,4"/>
+<text x="166.68" y="268.95" font-size="11" fill="#d0d">MeshBox_Die</text>
+<rect x="366.74" y="389.61" width="38.68" height="67.29" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
+<text x="386.08" y="426.26" font-size="9" fill="#600" text-anchor="middle">R1_1 20.5W</text>
+<rect x="431.20" y="389.61" width="38.68" height="67.29" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
+<text x="450.54" y="426.26" font-size="9" fill="#600" text-anchor="middle">R1_2 20.5W</text>
+<rect x="489.22" y="389.61" width="51.57" height="67.29" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
+<text x="515.00" y="426.26" font-size="9" fill="#600" text-anchor="middle">R1_3 34.1W</text>
+<rect x="560.12" y="389.61" width="38.68" height="67.29" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
+<text x="579.46" y="426.26" font-size="9" fill="#600" text-anchor="middle">R1_4 20.5W</text>
+<rect x="624.58" y="389.61" width="38.68" height="67.29" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
+<text x="643.92" y="426.26" font-size="9" fill="#600" text-anchor="middle">R1_5 20.5W</text>
+<rect x="366.74" y="303.10" width="38.68" height="67.29" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
+<text x="386.08" y="339.74" font-size="9" fill="#600" text-anchor="middle">R2_1 20.5W</text>
+<rect x="431.20" y="303.10" width="38.68" height="67.29" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
+<text x="450.54" y="339.74" font-size="9" fill="#600" text-anchor="middle">R2_2 20.5W</text>
+<rect x="489.22" y="303.10" width="51.57" height="67.29" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
+<text x="515.00" y="339.74" font-size="9" fill="#600" text-anchor="middle">R2_3 34.1W</text>
+<rect x="560.12" y="303.10" width="38.68" height="67.29" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
+<text x="579.46" y="339.74" font-size="9" fill="#600" text-anchor="middle">R2_4 20.5W</text>
+<rect x="624.58" y="303.10" width="38.68" height="67.29" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
+<text x="643.92" y="339.74" font-size="9" fill="#600" text-anchor="middle">R2_5 20.5W</text>
+<rect x="328.06" y="293.49" width="25.78" height="173.02" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
+<rect x="676.15" y="293.49" width="25.78" height="173.02" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
+<rect x="263.17" y="395.48" width="18.86" height="65.17" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
+<rect x="236.80" y="382.40" width="24.82" height="91.32" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
+<rect x="263.17" y="299.35" width="18.86" height="65.17" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
+<rect x="236.80" y="286.28" width="24.82" height="91.32" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
+<rect x="747.96" y="395.48" width="18.86" height="65.17" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
+<rect x="768.39" y="382.40" width="24.82" height="91.32" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
+<rect x="747.96" y="299.35" width="18.86" height="65.17" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
+<rect x="768.39" y="286.28" width="24.82" height="91.32" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
+<line x1="166.91" y1="698" x2="863.09" y2="698" stroke="#c33" stroke-width="1.2"/>
+<line x1="166.91" y1="694" x2="166.91" y2="702" stroke="#c33" stroke-width="1.2"/>
+<line x1="863.09" y1="694" x2="863.09" y2="702" stroke="#c33" stroke-width="1.2"/>
+<text x="515.00" y="691" font-size="11" fill="#c33" text-anchor="middle">interposer 54.0</text>
+<line x1="321.62" y1="720" x2="708.38" y2="720" stroke="#c33" stroke-width="1.2"/>
+<line x1="321.62" y1="716" x2="321.62" y2="724" stroke="#c33" stroke-width="1.2"/>
+<line x1="708.38" y1="716" x2="708.38" y2="724" stroke="#c33" stroke-width="1.2"/>
+<text x="515.00" y="713" font-size="11" fill="#c33" text-anchor="middle">GPU 30.0</text>
+<text x="96" y="746" font-size="12">x (mm)</text>
+<text x="18" y="380" font-size="12" transform="rotate(-90 18 380)">y (mm)</text>
+<text x="1035" y="746" font-size="10" fill="#777">horizontal 12.9 px/mm, vertical 8.7 px/mm</text>
+<rect x="1035" y="52" width="11" height="11" fill="rgb(200,190,220)" stroke="#333" stroke-width="0.3"/>
+<text x="1050" y="62" font-size="11">im_DRAM_BEOL  10.8 mm</text>
+<rect x="1035" y="68" width="11" height="11" fill="rgb(215,215,200)" stroke="#333" stroke-width="0.3"/>
+<text x="1050" y="78" font-size="11">im_Mold  </text>
+<rect x="1035" y="84" width="11" height="11" fill="rgb(120,170,220)" stroke="#333" stroke-width="0.3"/>
+<text x="1050" y="94" font-size="11">im_Si  </text>
+</svg>
