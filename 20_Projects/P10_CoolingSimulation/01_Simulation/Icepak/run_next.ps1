@@ -2,15 +2,33 @@
 # Works under the repo Icepak folder; outputs to Icepak\Runs\Run_XXX.
 #   Run_010_Lidded_BG39  : validated baseline, background 0.39 -> expect ~69.1 C
 #   Run_011_Lidless_BG39 : lid removed (LIDLESS), HTC on TIM top, same BG
+# NOTE: ansysedt -ng returns immediately (non-blocking) under a .bat, so we
+#       launch each driver then WAIT for its done-file and for the .aedt lock
+#       to release before the next step. Otherwise solve/post race the build.
 $ErrorActionPreference = 'Stop'
 $base = 'E:\0_DSIL_Member\Hyeongjun\Research\20_Projects\P10_CoolingSimulation\01_Simulation\Icepak'
 $ref  = Join-Path $base 'Run_008_Reference'
 $runs = Join-Path $base 'Runs'
 $exe  = 'C:\Program Files\ANSYS Inc\v261\AnsysEM\ansysedt.exe'
+$aedtname = '20261104_HBM2p5D_MeshGlobal025.aedt'
 $U8   = New-Object System.Text.UTF8Encoding $false
 $UTF8 = [System.Text.Encoding]::UTF8
 if (-not (Test-Path $exe))                   { throw "ansysedt not found: $exe" }
 if (-not (Test-Path "$ref\hbm_gpu_2p5d.py")) { throw "reference not found: $ref" }
+
+function Wait-Driver([string]$scriptpath, [string]$donefile, [string]$lock, [int]$maxMin) {
+  if (Test-Path $donefile) { Remove-Item $donefile -Force }
+  Start-Process -FilePath $exe -ArgumentList '-ng','-RunScriptAndExit',"$scriptpath" -NoNewWindow | Out-Null
+  $deadline = (Get-Date).AddMinutes($maxMin)
+  while (-not (Test-Path $donefile)) {
+    Start-Sleep -Seconds 3
+    if ((Get-Date) -gt $deadline) { Write-Host "    TIMEOUT waiting for $(Split-Path $donefile -Leaf)"; return }
+  }
+  # let AEDT save and release the project lock before the next step opens it
+  $t2 = (Get-Date).AddMinutes(3)
+  while ((Test-Path $lock) -and ((Get-Date) -lt $t2)) { Start-Sleep -Seconds 2 }
+  Start-Sleep -Seconds 2
+}
 
 function Stage-And-Run([string]$name, [string]$bg, [bool]$lidless) {
   $dst = Join-Path $runs $name
@@ -23,7 +41,7 @@ function Stage-And-Run([string]$name, [string]$bg, [bool]$lidless) {
   }
   $model = "$dst\Model"
 
-  # hbm_gpu_2p5d.py : set BG and (if lidless) LIDLESS.  Read/write as UTF-8 to keep Korean comments intact.
+  # hbm_gpu_2p5d.py : set BG and (if lidless) LIDLESS.  UTF-8 I/O keeps Korean comments intact.
   $h = "$model\hbm_gpu_2p5d.py"
   $t = [System.IO.File]::ReadAllText($h, $UTF8)
   $t = $t -replace 'GPU_BG_FRAC(\s*=\s*)0\.5\b', ('GPU_BG_FRAC${1}' + $bg)
@@ -40,15 +58,18 @@ function Stage-And-Run([string]$name, [string]$bg, [bool]$lidless) {
     [System.IO.File]::WriteAllText($p, $c, $U8)
   }
 
-  foreach ($step in 'driver_1_build.py','driver_2_solve.py','driver_3_post.py') {
-    Write-Host "  RUN $step $(Get-Date -Format HH:mm:ss)"
-    & $exe -ng -RunScriptAndExit "$model\$step"
-  }
+  $lock = "$model\$aedtname.lock"
+  Write-Host "  BUILD $(Get-Date -Format HH:mm:ss)"; Wait-Driver "$model\driver_1_build.py" "$dst\Export\build_done.txt" $lock 20
+  Write-Host "  SOLVE $(Get-Date -Format HH:mm:ss)"; Wait-Driver "$model\driver_2_solve.py" "$dst\Export\solve_done.txt" $lock 30
+  Write-Host "  POST  $(Get-Date -Format HH:mm:ss)"; Wait-Driver "$model\driver_3_post.py"  "$dst\Export\post_done.txt"  $lock 20
+
   if (Test-Path "$dst\Export\summary.json") {
     Write-Host "  --- $name summary ---"; Get-Content "$dst\Export\summary.json" -Raw
   } else {
     Write-Host "  !! $name NO summary.json"
-    if (Test-Path "$dst\Export\build_traceback.txt") { Write-Host "  -- build_traceback --"; Get-Content "$dst\Export\build_traceback.txt" -Raw }
+    foreach ($tb in 'build_traceback.txt','solve_traceback.txt') {
+      if (Test-Path "$dst\Export\$tb") { Write-Host "  -- $tb --"; Get-Content "$dst\Export\$tb" -Raw }
+    }
   }
 }
 
