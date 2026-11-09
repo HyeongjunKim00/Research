@@ -55,6 +55,7 @@ import sys
 SYMMETRY      = "none"     # "none" = 논문처럼 전체 모듈 | "quarter" = 1/4
 GROUP_SOURCES = False      # False = 발열 물체마다 Block 하나
 COOL_TOP      = True       # lid 윗면 Wall
+LIDLESS       = False      # True = 힛스프레더 제거, HTC 를 TIM 상면에 직접 (Phase 2 lid vs lidless)
 COOL_BOTTOM   = True       # laminate 아랫면 Wall (논문: 200 W/m2K 공랭)
 AUTO_MESH     = True
 ALLOW_OVERWRITE = False    # 디자인에 이미 solid 가 있으면 멈춘다
@@ -348,8 +349,12 @@ def build():
     # ---- TIM, lid ----------------------------------------------------------
     B("TIM", cx - TIM_W / 2.0, cy - TIM_H / 2.0, z_die_top, TIM_W, TIM_H, T_TIM, "TIM", grp="hs")
     z_lid = r9(z_die_top + T_TIM)
-    B("Lid", cx - LID_W / 2.0, cy - LID_H / 2.0, z_lid, LID_W, LID_H, T_LID, "Lid", grp="hs")
-    L.update(z_die_top=z_die_top, z_lid=z_lid, z_top=r9(z_lid + T_LID), cx=cx, cy=cy)
+    if LIDLESS:
+        z_top = z_lid                      # 힛스프레더 없음: TIM 상면이 냉각면
+    else:
+        B("Lid", cx - LID_W / 2.0, cy - LID_H / 2.0, z_lid, LID_W, LID_H, T_LID, "Lid", grp="hs")
+        z_top = r9(z_lid + T_LID)
+    L.update(z_die_top=z_die_top, z_lid=z_lid, z_top=z_top, cx=cx, cy=cy)
 
     # ---- 발열 블록: 층을 평면에서 쪼갠다 -------------------------------------
     srcs = sources(L)
@@ -1084,7 +1089,7 @@ def run_aedt():
             log("wall '%s' on %s %s face: h = %g W/m2K at %g degC" % (name, obj, label, h, T_AMB))
 
     if COOL_TOP:
-        wall("Cool_Lid", "Lid", L["z_top"], H_TOP, "TOP")
+        wall("Cool_Lid", "TIM" if LIDLESS else "Lid", L["z_top"], H_TOP, "TOP")
     if COOL_BOTTOM:
         wall("Cool_Bottom", "Laminate", 0.0, H_BOTTOM, "BOTTOM")
 
