@@ -63,10 +63,26 @@ function Stage-And-Run([string]$name, [string]$bg, [bool]$lidless) {
   Write-Host "  SOLVE $(Get-Date -Format HH:mm:ss)"; Wait-Driver "$model\driver_2_solve.py" "$dst\Export\solve_done.txt" $lock 30
   Write-Host "  POST  $(Get-Date -Format HH:mm:ss)"; Wait-Driver "$model\driver_3_post.py"  "$dst\Export\post_done.txt"  $lock 20
 
-  if (Test-Path "$dst\Export\summary.json") {
-    Write-Host "  --- $name summary ---"; Get-Content "$dst\Export\summary.json" -Raw
+  # summary.json is made separately by analyze_results.py (numpy); the real per-object
+  # data is object_temperatures.csv. Compute gpu_max / HBM base inline (analyze definition).
+  $ot = "$dst\Export\object_temperatures.csv"
+  if (Test-Path $ot) {
+    $rows = Import-Csv $ot | Where-Object { $_.Tmax_C -ne 'nan' -and $_.Tmin_C -ne 'nan' }
+    $gpu  = $rows | Where-Object { $_.group -eq 'gpu' -or $_.group -eq 'src_gpu' }
+    $gmax = ($gpu | ForEach-Object { [double]$_.Tmax_C } | Measure-Object -Maximum).Maximum
+    $gmin = ($gpu | ForEach-Object { [double]$_.Tmin_C } | Measure-Object -Minimum).Minimum
+    $bsum = 0.0; $bn = 0
+    foreach ($tag in 'L1','L2','R1','R2') {
+      $bm = $rows | Where-Object { $_.name -like "HBM_${tag}_Base*" -or $_.name -like "Src_${tag}_*" } | ForEach-Object { [double]$_.Tmax_C } | Measure-Object -Maximum
+      if ($bm.Count -gt 0) { $bsum += $bm.Maximum; $bn++ }
+    }
+    $hbm  = if ($bn) { $bsum / $bn } else { [double]::NaN }
+    $mmin = ($rows | ForEach-Object { [double]$_.Tmin_C } | Measure-Object -Minimum).Minimum
+    $line = ("{0}: GPU_peak={1:N2}  GPU_min={2:N2}  HBM_base={3:N2}  model_min={4:N2}" -f $name,$gmax,$gmin,$hbm,$mmin)
+    Write-Host "  >>> $line"
+    $line | Out-File -Encoding UTF8 "$dst\Export\summary_quick.txt"
   } else {
-    Write-Host "  !! $name NO summary.json"
+    Write-Host "  !! $name : no object_temperatures.csv (solve/post failed)"
     foreach ($tb in 'build_traceback.txt','solve_traceback.txt') {
       if (Test-Path "$dst\Export\$tb") { Write-Host "  -- $tb --"; Get-Content "$dst\Export\$tb" -Raw }
     }

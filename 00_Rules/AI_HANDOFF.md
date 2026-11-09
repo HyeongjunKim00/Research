@@ -27,8 +27,8 @@
 
 ## 연구 계획 순서 (형준님, 2026-11-09)
 1. 기존 HBM 구조 시뮬 문헌 검증 — **완료**
-2. 힛스프레더 유무(lid vs lidless) 열효율 러프 비교 (TIM·HTC 고정) ← 다음
-3. 특정 발열조건에서 힛스프레더 면적·두께의 필요 수준
+2. 힛스프레더 유무(lid vs lidless) 열효율 러프 비교 (TIM·HTC 고정) — **완료**: Run_010 lidded 69.0°C(=논문 69.1 안착) vs Run_011 lidless(방식 b) 74.3°C → **Δ+5.2°C, 현 크기선 lid 유리**. 상세 `Research_Log.md` Phase 2 요약.
+3. 특정 발열조건에서 힛스프레더 면적·두께의 필요 수준 ← 다음 (그래프 X축 ≥5점)
 4. 국소 핫스팟/die 최고온 상승 시 힛스프레더 유효성과 쿨링 한계 제시
 5. die 크기를 변수로 sweep (맨 마지막, 그래프 X축 ≥5점)
 
@@ -39,4 +39,8 @@
 - HBM 전력 분배 출처: Son et al., EDAPS 2023 (logic die 전력 배치)
 
 ## 다음 AI용 프롬프트
-Phase 1(문헌 검증) 완료. 다음은 **Phase 2: 힛스프레더 유무(lid vs lidless) 비교**다. 실행은 이 PC에서 ssh로 원격 랩 PC를 셔틀로 쓴다(파일·결과 자동, AEDT 실행만 사용자가 RDP에서 `run_next.ps1` 트리거 — 메모리 `project-remote-aedt-shuttle` 참조). AEDT는 **배치(`ansysedt -ng -RunScriptAndExit`)**로만 돌린다. lidless 상단 냉각 경계는 **(a) 양쪽 동일 콜드플레이트 솔리드 + 그 윗면 HTC** 권장(냉각 면적 교란 제거). TIM·HTC 고정 후 lid 유무만 비교. 결론(lidless 유리)은 미리 단정하지 말고 **데이터로 검증**한다(칩 크기 sweep은 Phase 5, 그래프 X축 ≥5점). 미확인·충돌 항목은 해결된 것처럼 쓰지 말고, 조사 근거는 `Research_Log.md`에도 남긴다.
+Phase 1(검증)·Phase 2(lid vs lidless 러프) 완료. 다음은 **Phase 3: 특정 발열조건에서 lid 면적·두께 sweep**(그래프 X축 ≥5점). 실행은 이 PC에서 ssh로 원격 랩 PC를 셔틀로 쓴다: run 폴더 생성·스크립트 파라미터화·결과 회수는 내가 ssh로 자동, **AEDT 실행만 사용자가 RDP 바탕화면 `RUN_AEDT.bat` 더블클릭**(`...\Icepak\run_next.ps1` 실행). 메모리 `project-remote-aedt-shuttle` 참조. 작업 위치: `E:\...\Research\20_Projects\P10_CoolingSimulation\01_Simulation\Icepak\`, run 출력은 그 아래 `Runs\Run_XXX\`.
+
+AEDT 실행 주의: `ansysedt -ng`는 (1) **대화형 데스크톱 세션 필요**(ssh 세션0에선 공회전) (2) .bat에서 **비동기 반환**하므로 드라이버를 순차로 돌리려면 done 파일+`.aedt.lock` 해제를 기다려야 함(`run_next.ps1`에 구현). 소스 스크립트는 한글 주석 때문에 **반드시 UTF-8로 읽고 쓴다**(PowerShell `Get-Content` 기본 cp949는 파일을 깨뜨림). summary.json은 driver가 아니라 `analyze_results.py`(numpy)가 생성 — 성공 기준은 `Export\object_temperatures.csv`/`post_done.txt`로 보고, gpu_max는 그 CSV에서 group∈{gpu,src_gpu}의 Tmax 최대로 산출(=analyze 정의).
+
+결론(lidless 유리)은 미리 단정하지 말고 **데이터로 검증**한다(칩 크기 sweep은 Phase 5). 미확인·충돌 항목은 해결된 것처럼 쓰지 말고, 조사 근거는 `Research_Log.md`에도 남긴다.
