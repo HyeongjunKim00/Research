@@ -1,7 +1,7 @@
 IEDM 2025 Chen et al. - 2.5D baseline (Fig. 2), modified DRAM stack  SYMMETRY=none
 ======================================================================
 boxes 260, powered 69, total 574.0 W
-  GPU 414 W = 207.0 W uniform in BSPDN + BEOL_MXY blocks (207.0 W): 10 hotspots with power-density ratio 1:1:1.25:1:1 per row + 2 NVLink at 0.5 x a small hotspot
+  GPU 414 W = 207.0 W uniform in BSPDN + BEOL_MXY blocks (207.0 W): 10 hotspots with power-density ratio 1:1:1.25:1:1 per row + 2 HBM-PHY (+-x) each at 0.5 x a small hotspot (NVLink removed)
   hotspot power density: R1_1 0.7266 W/mm2, R1_2 0.7266 W/mm2, R1_3 0.9082 W/mm2, R1_4 0.7266 W/mm2, R1_5 0.7266 W/mm2
   HBM per stack 40.0 W = base BEOL blocks PHY 5.333 W + TSV&I/O 2.667 W, DRAM Si 2.667 W x 12
   (reference PHY 4 / TSV 2 / DRAM 2 W x 12 = 30 W, scaled x 1.3333 to the paper's 40 W)
@@ -19,16 +19,16 @@ heat blocks (each is a piece of a real layer, Block boundary with Total Power):
   Src_GPU_R2_3     x  30.50.. 34.50  y  33.60.. 41.30  z 0.511865..0.513265   4.00 x  7.70 mm   27.973 W  in BEOL_MXY
   Src_GPU_R2_4     x  36.00.. 39.00  y  33.60.. 41.30  z 0.511865..0.513265   3.00 x  7.70 mm   16.784 W  in BEOL_MXY
   Src_GPU_R2_5     x  41.00.. 44.00  y  33.60.. 41.30  z 0.511865..0.513265   3.00 x  7.70 mm   16.784 W  in BEOL_MXY
-  Src_GPU_NVL_L    x  18.00.. 20.00  y  22.60.. 42.40  z 0.511865..0.513265   2.00 x 19.80 mm    8.392 W  in BEOL_MXY
-  Src_GPU_NVL_R    x  45.00.. 47.00  y  22.60.. 42.40  z 0.511865..0.513265   2.00 x 19.80 mm    8.392 W  in BEOL_MXY
+  Src_GPU_PHY_L    x  17.70.. 19.20  y  24.00.. 41.00  z 0.511865..0.513265   1.50 x 17.00 mm    8.392 W  in BEOL_MXY
+  Src_GPU_PHY_R    x  45.80.. 47.30  y  24.00.. 41.00  z 0.511865..0.513265   1.50 x 17.00 mm    8.392 W  in BEOL_MXY
   Src_L1_PHY       x  12.97.. 14.43  y  23.27.. 30.73  z 0.510000..0.515000   1.46 x  7.46 mm    5.333 W  in HBM_L1_BaseBEOL
-  Src_L1_TSV       x  10.92.. 12.85  y  21.78.. 32.23  z 0.510000..0.515000   1.93 x 10.45 mm    2.667 W  in HBM_L1_BaseBEOL
+  Src_L1_TSV       x  10.92.. 12.85  y  21.77.. 32.22  z 0.510000..0.515000   1.93 x 10.45 mm    2.667 W  in HBM_L1_BaseBEOL
   Src_L2_PHY       x  12.97.. 14.43  y  34.27.. 41.73  z 0.510000..0.515000   1.46 x  7.46 mm    5.333 W  in HBM_L2_BaseBEOL
-  Src_L2_TSV       x  10.92.. 12.85  y  32.78.. 43.23  z 0.510000..0.515000   1.93 x 10.45 mm    2.667 W  in HBM_L2_BaseBEOL
+  Src_L2_TSV       x  10.92.. 12.85  y  32.77.. 43.22  z 0.510000..0.515000   1.93 x 10.45 mm    2.667 W  in HBM_L2_BaseBEOL
   Src_R1_PHY       x  50.57.. 52.03  y  23.27.. 30.73  z 0.510000..0.515000   1.46 x  7.46 mm    5.333 W  in HBM_R1_BaseBEOL
-  Src_R1_TSV       x  52.15.. 54.08  y  21.78.. 32.23  z 0.510000..0.515000   1.93 x 10.45 mm    2.667 W  in HBM_R1_BaseBEOL
+  Src_R1_TSV       x  52.15.. 54.08  y  21.77.. 32.22  z 0.510000..0.515000   1.93 x 10.45 mm    2.667 W  in HBM_R1_BaseBEOL
   Src_R2_PHY       x  50.57.. 52.03  y  34.27.. 41.73  z 0.510000..0.515000   1.46 x  7.46 mm    5.333 W  in HBM_R2_BaseBEOL
-  Src_R2_TSV       x  52.15.. 54.08  y  32.78.. 43.23  z 0.510000..0.515000   1.93 x 10.45 mm    2.667 W  in HBM_R2_BaseBEOL
+  Src_R2_TSV       x  52.15.. 54.08  y  32.77.. 43.22  z 0.510000..0.515000   1.93 x 10.45 mm    2.667 W  in HBM_R2_BaseBEOL
 
 plan (mm)
   laminate   65.0 x 65.0
@@ -120,11 +120,11 @@ stack (every box, bottom to top):
   HBM_R1_BaseBEOL_07   z  0.510000 ..  0.515000 (0.005000)  xy   4.52 x  11.00  im_Base_BEOL   
   HBM_R2_BaseBEOL_07   z  0.510000 ..  0.515000 (0.005000)  xy   4.52 x  11.00  im_Base_BEOL   
   GPU_FEOL             z  0.511715 ..  0.511865 (0.000150)  xy  30.00 x  22.00  im_FEOL        
-  BEOL_MXY_01          z  0.511865 ..  0.513265 (0.001400)  xy   0.50 x  22.00  im_BEOL_MXY    
-  BEOL_MXY_02          z  0.511865 ..  0.513265 (0.001400)  xy   2.00 x   1.10  im_BEOL_MXY    
-  Src_GPU_NVL_L        z  0.511865 ..  0.513265 (0.001400)  xy   2.00 x  19.80  im_BEOL_MXY    8.392 W
-  BEOL_MXY_03          z  0.511865 ..  0.513265 (0.001400)  xy   2.00 x   1.10  im_BEOL_MXY    
-  BEOL_MXY_04          z  0.511865 ..  0.513265 (0.001400)  xy   1.00 x  22.00  im_BEOL_MXY    
+  BEOL_MXY_01          z  0.511865 ..  0.513265 (0.001400)  xy   0.20 x  22.00  im_BEOL_MXY    
+  BEOL_MXY_02          z  0.511865 ..  0.513265 (0.001400)  xy   1.50 x   2.50  im_BEOL_MXY    
+  Src_GPU_PHY_L        z  0.511865 ..  0.513265 (0.001400)  xy   1.50 x  17.00  im_BEOL_MXY    8.392 W
+  BEOL_MXY_03          z  0.511865 ..  0.513265 (0.001400)  xy   1.50 x   2.50  im_BEOL_MXY    
+  BEOL_MXY_04          z  0.511865 ..  0.513265 (0.001400)  xy   1.80 x  22.00  im_BEOL_MXY    
   BEOL_MXY_05          z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   2.20  im_BEOL_MXY    
   Src_GPU_R1_1         z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   7.70  im_BEOL_MXY    16.784 W
   BEOL_MXY_06          z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   2.20  im_BEOL_MXY    
@@ -154,11 +154,11 @@ stack (every box, bottom to top):
   BEOL_MXY_22          z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   2.20  im_BEOL_MXY    
   Src_GPU_R2_5         z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   7.70  im_BEOL_MXY    16.784 W
   BEOL_MXY_23          z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   2.20  im_BEOL_MXY    
-  BEOL_MXY_24          z  0.511865 ..  0.513265 (0.001400)  xy   1.00 x  22.00  im_BEOL_MXY    
-  BEOL_MXY_25          z  0.511865 ..  0.513265 (0.001400)  xy   2.00 x   1.10  im_BEOL_MXY    
-  Src_GPU_NVL_R        z  0.511865 ..  0.513265 (0.001400)  xy   2.00 x  19.80  im_BEOL_MXY    8.392 W
-  BEOL_MXY_26          z  0.511865 ..  0.513265 (0.001400)  xy   2.00 x   1.10  im_BEOL_MXY    
-  BEOL_MXY_27          z  0.511865 ..  0.513265 (0.001400)  xy   0.50 x  22.00  im_BEOL_MXY    
+  BEOL_MXY_24          z  0.511865 ..  0.513265 (0.001400)  xy   1.80 x  22.00  im_BEOL_MXY    
+  BEOL_MXY_25          z  0.511865 ..  0.513265 (0.001400)  xy   1.50 x   2.50  im_BEOL_MXY    
+  Src_GPU_PHY_R        z  0.511865 ..  0.513265 (0.001400)  xy   1.50 x  17.00  im_BEOL_MXY    8.392 W
+  BEOL_MXY_26          z  0.511865 ..  0.513265 (0.001400)  xy   1.50 x   2.50  im_BEOL_MXY    
+  BEOL_MXY_27          z  0.511865 ..  0.513265 (0.001400)  xy   0.20 x  22.00  im_BEOL_MXY    
   BSPDN_Bond           z  0.513265 ..  0.513765 (0.000500)  xy  30.00 x  22.00  im_BSPDN_Bond  
   GPU_Carrier          z  0.513765 ..  1.245000 (0.731235)  xy  30.00 x  22.00  im_Si          
   HBM_L1_BaseSi        z  0.515000 ..  0.565000 (0.050000)  xy  11.00 x  11.00  im_Si          
@@ -323,6 +323,3 @@ stack (every box, bottom to top):
   HBM_R2_D12_Si        z  1.089000 ..  1.245000 (0.156000)  xy  10.80 x  10.80  im_Si          2.667 W
   TIM                  z  1.245000 ..  1.445000 (0.200000)  xy  54.00 x  24.00  im_TIM         
   Lid                  z  1.445000 ..  4.445000 (3.000000)  xy  65.00 x  65.00  im_Lid         
-
-MANUAL (AEDT refused these, do them by hand):
-  Mesh sub-region on MeshBox_Die   [AEDT: 'ADispatchWrapper' object has no attribute 'CreateSubregion']

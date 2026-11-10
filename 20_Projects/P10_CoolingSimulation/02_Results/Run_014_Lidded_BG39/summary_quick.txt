@@ -1,0 +1,1 @@
+﻿Run_014_Lidded_BG39: GPU_peak=69.01  GPU_min=34.45  HBM_base=56.25  model_min=20.23

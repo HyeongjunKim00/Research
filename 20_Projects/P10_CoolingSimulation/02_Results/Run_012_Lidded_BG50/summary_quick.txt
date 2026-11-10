@@ -1,0 +1,1 @@
+﻿Run_012_Lidded_BG50: GPU_peak=66.53  GPU_min=35.17  HBM_base=56.36  model_min=20.23

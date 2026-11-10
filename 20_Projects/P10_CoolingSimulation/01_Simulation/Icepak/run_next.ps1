@@ -64,6 +64,17 @@ function Stage-And-Run([string]$name, [string]$bg, [bool]$lidless) {
     [System.IO.File]::WriteAllText($p, $c, $U8)
   }
 
+  # regenerate geometry.csv / report / SVG from THIS run's model (BG-specific,
+  # PHY not NVL).  dry_run() is pure Python (no AEDT); driver_3_post reads this
+  # geometry.csv, so without this step object_temperatures.csv keeps stale rows.
+  Write-Host "  GEOM  $(Get-Date -Format HH:mm:ss)"
+  Push-Location $model
+  & python hbm_gpu_2p5d.py *> "$dst\Export\geom_regen.log"
+  Pop-Location
+  if (-not (Select-String -Path "$model\hbm_gpu_2p5d_geometry.csv" -Pattern 'Src_GPU_PHY' -Quiet)) {
+    throw "$name geometry regen failed (no Src_GPU_PHY rows in geometry.csv)"
+  }
+
   $lock = "$model\$aedtname.lock"
   Write-Host "  BUILD $(Get-Date -Format HH:mm:ss)"; Wait-Driver "$model\driver_1_build.py" "$dst\Export\build_done.txt" $lock 20
   Write-Host "  SOLVE $(Get-Date -Format HH:mm:ss)"; Wait-Driver "$model\driver_2_solve.py" "$dst\Export\solve_done.txt" $lock 30

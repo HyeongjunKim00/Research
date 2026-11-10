@@ -45,16 +45,16 @@
 <rect x="489.22" y="597.99" width="51.57" height="0.60" fill="rgb(230,120,140)" stroke="#333" stroke-width="0.3"/>
 <rect x="560.12" y="597.99" width="38.68" height="0.60" fill="rgb(230,120,140)" stroke="#333" stroke-width="0.3"/>
 <rect x="624.58" y="597.99" width="38.68" height="0.60" fill="rgb(230,120,140)" stroke="#333" stroke-width="0.3"/>
-<rect x="328.06" y="597.99" width="25.78" height="0.60" fill="rgb(230,120,140)" stroke="#333" stroke-width="0.3"/>
-<rect x="676.15" y="597.99" width="25.78" height="0.60" fill="rgb(230,120,140)" stroke="#333" stroke-width="0.3"/>
-<rect x="321.62" y="597.99" width="6.45" height="0.60" fill="rgb(230,120,140)" stroke="#333" stroke-width="0.3"/>
-<rect x="353.85" y="597.99" width="12.89" height="0.60" fill="rgb(230,120,140)" stroke="#333" stroke-width="0.3"/>
+<rect x="324.19" y="597.99" width="19.34" height="0.60" fill="rgb(230,120,140)" stroke="#333" stroke-width="0.3"/>
+<rect x="686.47" y="597.99" width="19.34" height="0.60" fill="rgb(230,120,140)" stroke="#333" stroke-width="0.3"/>
+<rect x="321.62" y="597.99" width="2.58" height="0.60" fill="rgb(230,120,140)" stroke="#333" stroke-width="0.3"/>
+<rect x="343.53" y="597.99" width="23.21" height="0.60" fill="rgb(230,120,140)" stroke="#333" stroke-width="0.3"/>
 <rect x="405.42" y="597.99" width="25.78" height="0.60" fill="rgb(230,120,140)" stroke="#333" stroke-width="0.3"/>
 <rect x="469.88" y="597.99" width="19.34" height="0.60" fill="rgb(230,120,140)" stroke="#333" stroke-width="0.3"/>
 <rect x="540.78" y="597.99" width="19.34" height="0.60" fill="rgb(230,120,140)" stroke="#333" stroke-width="0.3"/>
 <rect x="598.80" y="597.99" width="25.78" height="0.60" fill="rgb(230,120,140)" stroke="#333" stroke-width="0.3"/>
-<rect x="663.26" y="597.99" width="12.89" height="0.60" fill="rgb(230,120,140)" stroke="#333" stroke-width="0.3"/>
-<rect x="701.94" y="597.99" width="6.45" height="0.60" fill="rgb(230,120,140)" stroke="#333" stroke-width="0.3"/>
+<rect x="663.26" y="597.99" width="23.21" height="0.60" fill="rgb(230,120,140)" stroke="#333" stroke-width="0.3"/>
+<rect x="705.81" y="597.99" width="2.58" height="0.60" fill="rgb(230,120,140)" stroke="#333" stroke-width="0.3"/>
 <rect x="321.62" y="597.81" width="386.77" height="0.60" fill="rgb(140,190,120)" stroke="#333" stroke-width="0.3"/>
 <rect x="321.62" y="504.91" width="386.77" height="93.44" fill="rgb(120,170,220)" stroke="#333" stroke-width="0.3"/>
 <rect x="178.51" y="598.83" width="141.82" height="5.11" fill="rgb(90,160,140)" stroke="#333" stroke-width="0.3"/>
@@ -160,13 +160,13 @@
 <rect x="431.20" y="596.83" width="38.68" height="2.50" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
 <text x="450.54" y="602.24" font-size="9" fill="#600" text-anchor="middle">R2_2 16.8W</text>
 <rect x="489.22" y="596.83" width="51.57" height="2.50" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
-<text x="515.00" y="602.24" font-size="9" fill="#600" text-anchor="middle">R2_3 28.0W</text>
+<text x="515.00" y="602.24" font-size="9" fill="#600" text-anchor="middle">R2_3 28W</text>
 <rect x="560.12" y="596.83" width="38.68" height="2.50" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
 <text x="579.46" y="602.24" font-size="9" fill="#600" text-anchor="middle">R2_4 16.8W</text>
 <rect x="624.58" y="596.83" width="38.68" height="2.50" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
 <text x="643.92" y="602.24" font-size="9" fill="#600" text-anchor="middle">R2_5 16.8W</text>
-<rect x="328.06" y="596.83" width="25.78" height="2.50" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
-<rect x="676.15" y="596.83" width="25.78" height="2.50" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
+<rect x="324.19" y="596.83" width="19.34" height="2.50" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
+<rect x="686.47" y="596.83" width="19.34" height="2.50" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
 <rect x="263.17" y="597.26" width="18.86" height="2.50" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
 <rect x="236.80" y="597.26" width="24.82" height="2.50" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>
 <rect x="747.96" y="597.26" width="18.86" height="2.50" fill="#e33" fill-opacity="0.6" stroke="#900" stroke-width="0.8"/>

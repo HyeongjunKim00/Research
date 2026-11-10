@@ -1,0 +1,1 @@
+﻿Run_015_Lidless_BG39: GPU_peak=74.26  GPU_min=34.71  HBM_base=57.03  model_min=20.25

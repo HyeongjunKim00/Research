@@ -1,0 +1,1 @@
+﻿Run_013_Lidded_BG30: GPU_peak=71.05  GPU_min=33.87  HBM_base=56.16  model_min=20.23

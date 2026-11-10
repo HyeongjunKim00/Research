@@ -8,12 +8,22 @@
 - 수렴 메시(전역 0.25 mm + die 0.5/0.5/0.02 mm)
 - lidless = 방식 (b): lid 제거, HTC를 TIM 상면(54×24, die+mold 상면)에 직접
 
-## 결과
-| 케이스 | GPU peak | GPU min | HBM base(4스택 평균) | 폴더 |
-|---|---|---|---|---|
-| **Lidded** (Run_010) | **69.03°C** | 34.90 | 56.05 | `Run_010_Lidded_BG39/` |
-| **Lidless** (Run_011) | **74.26°C** | 35.42 | 56.78 | `Run_011_Lidless_BG39/` |
-| **Δ (lidless − lidded)** | **+5.23** | +0.52 | +0.73 | |
+## 결과 (2026-11-10 교정맵 재검증, Run_012~015)
+발열맵 교정(NVLink 제거·GPU-측 HBM PHY 정립) 후 재실행. 값은 교정 전과 ±0.03°C로 동일 → 확정.
+
+| 케이스 | GPU peak | HBM base(4스택 평균) | 폴더 |
+|---|---|---|---|
+| Lidded BG50 (Phase1 브라켓↓) | 66.53°C | 56.36 | `Run_012_Lidded_BG50/` |
+| Lidded BG30 (Phase1 브라켓↑) | 71.05°C | 56.16 | `Run_013_Lidded_BG30/` |
+| **Lidded BG39** (논문 앵커) | **69.01°C** | 56.25 | `Run_014_Lidded_BG39/` |
+| **Lidless BG39** (방식 b) | **74.26°C** | 57.03 | `Run_015_Lidless_BG39/` |
+| **Δ (lidless − lidded)** | **+5.25** | +0.78 | |
+
+BG50(66.5)·BG30(71.1)이 논문 69.1°C를 재브라켓 → BG≈39% 앵커 유지. (구 Run_010/011도 폴더 보존.)
+
+> 주의: Run_012~015 `object_temperatures.csv`는 교정 전 geometry.csv로 post돼 유령 NVL행(nan)·
+> PHY행 누락·power열 구값이 섞임. **Tmax/peak/HBM base 는 solved 실값이라 정확.** 다음 run부터
+> 런처가 런마다 geometry 재생성해 자동 클린(필요 시 post-only 재실행으로 완전 클린 CSV 획득).
 
 (값은 각 폴더 `object_temperatures.csv`에서 `analyze_results.py` 정의로 산출: GPU = group∈{gpu, src_gpu}의 Tmax 최대, HBM base = 스택별 base 블록 Tmax 최대의 4스택 평균)
 

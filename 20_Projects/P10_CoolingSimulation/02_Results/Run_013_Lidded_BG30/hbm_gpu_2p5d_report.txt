@@ -1,0 +1,328 @@
+IEDM 2025 Chen et al. - 2.5D baseline (Fig. 2), modified DRAM stack  SYMMETRY=none
+======================================================================
+boxes 260, powered 69, total 574.0 W
+  GPU 414 W = 124.2 W uniform in BSPDN + BEOL_MXY blocks (289.8 W): 10 hotspots with power-density ratio 1:1:1.25:1:1 per row + 2 HBM-PHY (+-x) each at 0.5 x a small hotspot (NVLink removed)
+  hotspot power density: R1_1 1.0172 W/mm2, R1_2 1.0172 W/mm2, R1_3 1.2715 W/mm2, R1_4 1.0172 W/mm2, R1_5 1.0172 W/mm2
+  HBM per stack 40.0 W = base BEOL blocks PHY 5.333 W + TSV&I/O 2.667 W, DRAM Si 2.667 W x 12
+  (reference PHY 4 / TSV 2 / DRAM 2 W x 12 = 30 W, scaled x 1.3333 to the paper's 40 W)
+
+DRAM stack unit (bottom to top): microbump 15 um / BEOL 3 um / Si 28 um (top die Si 156 um); no hybrid bonding
+
+heat blocks (each is a piece of a real layer, Block boundary with Total Power):
+  Src_GPU_R1_1     x  21.00.. 24.00  y  23.70.. 31.40  z 0.511865..0.513265   3.00 x  7.70 mm   23.497 W  in BEOL_MXY
+  Src_GPU_R1_2     x  26.00.. 29.00  y  23.70.. 31.40  z 0.511865..0.513265   3.00 x  7.70 mm   23.497 W  in BEOL_MXY
+  Src_GPU_R1_3     x  30.50.. 34.50  y  23.70.. 31.40  z 0.511865..0.513265   4.00 x  7.70 mm   39.162 W  in BEOL_MXY
+  Src_GPU_R1_4     x  36.00.. 39.00  y  23.70.. 31.40  z 0.511865..0.513265   3.00 x  7.70 mm   23.497 W  in BEOL_MXY
+  Src_GPU_R1_5     x  41.00.. 44.00  y  23.70.. 31.40  z 0.511865..0.513265   3.00 x  7.70 mm   23.497 W  in BEOL_MXY
+  Src_GPU_R2_1     x  21.00.. 24.00  y  33.60.. 41.30  z 0.511865..0.513265   3.00 x  7.70 mm   23.497 W  in BEOL_MXY
+  Src_GPU_R2_2     x  26.00.. 29.00  y  33.60.. 41.30  z 0.511865..0.513265   3.00 x  7.70 mm   23.497 W  in BEOL_MXY
+  Src_GPU_R2_3     x  30.50.. 34.50  y  33.60.. 41.30  z 0.511865..0.513265   4.00 x  7.70 mm   39.162 W  in BEOL_MXY
+  Src_GPU_R2_4     x  36.00.. 39.00  y  33.60.. 41.30  z 0.511865..0.513265   3.00 x  7.70 mm   23.497 W  in BEOL_MXY
+  Src_GPU_R2_5     x  41.00.. 44.00  y  33.60.. 41.30  z 0.511865..0.513265   3.00 x  7.70 mm   23.497 W  in BEOL_MXY
+  Src_GPU_PHY_L    x  17.70.. 19.20  y  24.00.. 41.00  z 0.511865..0.513265   1.50 x 17.00 mm   11.749 W  in BEOL_MXY
+  Src_GPU_PHY_R    x  45.80.. 47.30  y  24.00.. 41.00  z 0.511865..0.513265   1.50 x 17.00 mm   11.749 W  in BEOL_MXY
+  Src_L1_PHY       x  12.97.. 14.43  y  23.27.. 30.73  z 0.510000..0.515000   1.46 x  7.46 mm    5.333 W  in HBM_L1_BaseBEOL
+  Src_L1_TSV       x  10.92.. 12.85  y  21.78.. 32.23  z 0.510000..0.515000   1.93 x 10.45 mm    2.667 W  in HBM_L1_BaseBEOL
+  Src_L2_PHY       x  12.97.. 14.43  y  34.27.. 41.73  z 0.510000..0.515000   1.46 x  7.46 mm    5.333 W  in HBM_L2_BaseBEOL
+  Src_L2_TSV       x  10.92.. 12.85  y  32.78.. 43.23  z 0.510000..0.515000   1.93 x 10.45 mm    2.667 W  in HBM_L2_BaseBEOL
+  Src_R1_PHY       x  50.57.. 52.03  y  23.27.. 30.73  z 0.510000..0.515000   1.46 x  7.46 mm    5.333 W  in HBM_R1_BaseBEOL
+  Src_R1_TSV       x  52.15.. 54.08  y  21.78.. 32.23  z 0.510000..0.515000   1.93 x 10.45 mm    2.667 W  in HBM_R1_BaseBEOL
+  Src_R2_PHY       x  50.57.. 52.03  y  34.27.. 41.73  z 0.510000..0.515000   1.46 x  7.46 mm    5.333 W  in HBM_R2_BaseBEOL
+  Src_R2_TSV       x  52.15.. 54.08  y  32.78.. 43.23  z 0.510000..0.515000   1.93 x 10.45 mm    2.667 W  in HBM_R2_BaseBEOL
+
+plan (mm)
+  laminate   65.0 x 65.0
+  interposer 54.0 x 24.0  at x 5.50..59.50  y 20.50..44.50
+  GPU        30.0 x 22.0  at x 17.50..47.50  y 21.50..43.50
+  base die   11.0 x 11.0  L x 6.40..17.40  R x 47.60..58.60   rows y 21.50..32.50, 32.50..43.50
+  DRAM die   10.80 x 10.80  centred on the base die (0.10 mm mold rim)
+  gaps: GPU-HBM 0.10, HBM-interposer edge x 0.90 / y 1.00, row gap 0.00
+  TIM 54.0 x 24.0,  lid 65.0 x 65.0
+
+z (mm)
+  interposer top 0.4700,  base die top 0.5650,  die top 1.2450,  lid 1.4450..4.4450
+  HBM column 0.7750 = GPU column 0.7750 above the interposer BEOL
+
+cooling: lid top h = 30000 W/m2K, laminate bottom h = 200 W/m2K, ambient 20 degC
+  everything else adiabatic (domain boundary without a Wall)
+
+mesh: global max (0.25, 0.25, 0.25) mm, min gap (0.01, 0.01, 0.0001) mm
+  MeshBox_Die x 5.25..59.75 y 20.25..44.75 z 0.3350..1.3450  max (0.5, 0.5, 0.02) mm
+  about 0.43 M cells inside it (109 x 49 x 80)
+  thinnest layer 0.15 um (FEOL) -> one cell, aspect up to 3333
+
+pre-flight: no overlaps, mold fills the interposer volume exactly, split layers cover their footprint, power and stack heights check out, PHY faces the GPU on all four stacks (PHY_FACE = gpu)
+
+TYPE THESE IN BY HAND (number left, unit from the dropdown):
+  Thermal > Cool_Lid                 Heat Transfer Coeff    30000        w_per_m2kel
+  Thermal > Cool_Lid                 External Temperature   20           cel
+  Thermal > Cool_Bottom              Heat Transfer Coeff    200          w_per_m2kel
+  Thermal > Cool_Bottom              External Temperature   20           cel
+  Definitions > im_uBump             Thermal Conductivity   anisotropic  X 0.59, Y 0.59, Z 19.28
+  Definitions > im_BSPDN             Thermal Conductivity   anisotropic  X 83, Y 83, Z 71
+  Definitions > im_CuPillar          Thermal Conductivity   anisotropic  X 0.54, Y 0.54, Z 13.25
+
+stack (every box, bottom to top):
+  Laminate             z  0.000000 ..  0.300000 (0.300000)  xy  65.00 x  65.00  im_Laminate    
+  CuPillar             z  0.300000 ..  0.370000 (0.070000)  xy  54.00 x  24.00  im_CuPillar    
+  Interposer           z  0.370000 ..  0.465000 (0.095000)  xy  54.00 x  24.00  im_Si          
+  IntBEOL              z  0.465000 ..  0.470000 (0.005000)  xy  54.00 x  24.00  im_Int_BEOL    
+  Mold_01              z  0.470000 ..  0.565000 (0.095000)  xy   0.90 x  24.00  im_Mold        
+  Mold_02              z  0.470000 ..  0.565000 (0.095000)  xy  11.00 x   1.00  im_Mold        
+  HBM_L1_uBump         z  0.470000 ..  0.510000 (0.040000)  xy  11.00 x  11.00  im_uBump       
+  HBM_L2_uBump         z  0.470000 ..  0.510000 (0.040000)  xy  11.00 x  11.00  im_uBump       
+  Mold_03              z  0.470000 ..  0.565000 (0.095000)  xy  11.00 x   1.00  im_Mold        
+  Mold_04              z  0.470000 ..  0.565000 (0.095000)  xy   0.10 x  24.00  im_Mold        
+  Mold_05              z  0.470000 ..  0.565000 (0.095000)  xy  30.00 x   1.00  im_Mold        
+  GPU_uBump            z  0.470000 ..  0.510000 (0.040000)  xy  30.00 x  22.00  im_uBump       
+  Mold_06              z  0.470000 ..  0.565000 (0.095000)  xy  30.00 x   1.00  im_Mold        
+  Mold_07              z  0.470000 ..  0.565000 (0.095000)  xy   0.10 x  24.00  im_Mold        
+  Mold_08              z  0.470000 ..  0.565000 (0.095000)  xy  11.00 x   1.00  im_Mold        
+  HBM_R1_uBump         z  0.470000 ..  0.510000 (0.040000)  xy  11.00 x  11.00  im_uBump       
+  HBM_R2_uBump         z  0.470000 ..  0.510000 (0.040000)  xy  11.00 x  11.00  im_uBump       
+  Mold_09              z  0.470000 ..  0.565000 (0.095000)  xy  11.00 x   1.00  im_Mold        
+  Mold_10              z  0.470000 ..  0.565000 (0.095000)  xy   0.90 x  24.00  im_Mold        
+  HBM_L1_BaseBEOL_01   z  0.510000 ..  0.515000 (0.005000)  xy   4.52 x  11.00  im_Base_BEOL   
+  HBM_L2_BaseBEOL_01   z  0.510000 ..  0.515000 (0.005000)  xy   4.52 x  11.00  im_Base_BEOL   
+  HBM_L1_BaseBEOL_02   z  0.510000 ..  0.515000 (0.005000)  xy   1.93 x   0.28  im_Base_BEOL   
+  Src_L1_TSV           z  0.510000 ..  0.515000 (0.005000)  xy   1.93 x  10.45  im_Base_BEOL   2.667 W
+  HBM_L1_BaseBEOL_03   z  0.510000 ..  0.515000 (0.005000)  xy   1.93 x   0.28  im_Base_BEOL   
+  HBM_L2_BaseBEOL_02   z  0.510000 ..  0.515000 (0.005000)  xy   1.93 x   0.28  im_Base_BEOL   
+  Src_L2_TSV           z  0.510000 ..  0.515000 (0.005000)  xy   1.93 x  10.45  im_Base_BEOL   2.667 W
+  HBM_L2_BaseBEOL_03   z  0.510000 ..  0.515000 (0.005000)  xy   1.93 x   0.28  im_Base_BEOL   
+  HBM_L1_BaseBEOL_04   z  0.510000 ..  0.515000 (0.005000)  xy   0.12 x  11.00  im_Base_BEOL   
+  HBM_L2_BaseBEOL_04   z  0.510000 ..  0.515000 (0.005000)  xy   0.12 x  11.00  im_Base_BEOL   
+  HBM_L1_BaseBEOL_05   z  0.510000 ..  0.515000 (0.005000)  xy   1.46 x   1.77  im_Base_BEOL   
+  Src_L1_PHY           z  0.510000 ..  0.515000 (0.005000)  xy   1.46 x   7.46  im_Base_BEOL   5.333 W
+  HBM_L1_BaseBEOL_06   z  0.510000 ..  0.515000 (0.005000)  xy   1.46 x   1.77  im_Base_BEOL   
+  HBM_L2_BaseBEOL_05   z  0.510000 ..  0.515000 (0.005000)  xy   1.46 x   1.77  im_Base_BEOL   
+  Src_L2_PHY           z  0.510000 ..  0.515000 (0.005000)  xy   1.46 x   7.46  im_Base_BEOL   5.333 W
+  HBM_L2_BaseBEOL_06   z  0.510000 ..  0.515000 (0.005000)  xy   1.46 x   1.77  im_Base_BEOL   
+  HBM_L1_BaseBEOL_07   z  0.510000 ..  0.515000 (0.005000)  xy   2.97 x  11.00  im_Base_BEOL   
+  HBM_L2_BaseBEOL_07   z  0.510000 ..  0.515000 (0.005000)  xy   2.97 x  11.00  im_Base_BEOL   
+  BSPDN                z  0.510000 ..  0.511715 (0.001715)  xy  30.00 x  22.00  im_BSPDN       124.200 W
+  HBM_R1_BaseBEOL_01   z  0.510000 ..  0.515000 (0.005000)  xy   2.97 x  11.00  im_Base_BEOL   
+  HBM_R2_BaseBEOL_01   z  0.510000 ..  0.515000 (0.005000)  xy   2.97 x  11.00  im_Base_BEOL   
+  HBM_R1_BaseBEOL_02   z  0.510000 ..  0.515000 (0.005000)  xy   1.46 x   1.77  im_Base_BEOL   
+  Src_R1_PHY           z  0.510000 ..  0.515000 (0.005000)  xy   1.46 x   7.46  im_Base_BEOL   5.333 W
+  HBM_R1_BaseBEOL_03   z  0.510000 ..  0.515000 (0.005000)  xy   1.46 x   1.77  im_Base_BEOL   
+  HBM_R2_BaseBEOL_02   z  0.510000 ..  0.515000 (0.005000)  xy   1.46 x   1.77  im_Base_BEOL   
+  Src_R2_PHY           z  0.510000 ..  0.515000 (0.005000)  xy   1.46 x   7.46  im_Base_BEOL   5.333 W
+  HBM_R2_BaseBEOL_03   z  0.510000 ..  0.515000 (0.005000)  xy   1.46 x   1.77  im_Base_BEOL   
+  HBM_R1_BaseBEOL_04   z  0.510000 ..  0.515000 (0.005000)  xy   0.12 x  11.00  im_Base_BEOL   
+  HBM_R2_BaseBEOL_04   z  0.510000 ..  0.515000 (0.005000)  xy   0.12 x  11.00  im_Base_BEOL   
+  HBM_R1_BaseBEOL_05   z  0.510000 ..  0.515000 (0.005000)  xy   1.93 x   0.28  im_Base_BEOL   
+  Src_R1_TSV           z  0.510000 ..  0.515000 (0.005000)  xy   1.93 x  10.45  im_Base_BEOL   2.667 W
+  HBM_R1_BaseBEOL_06   z  0.510000 ..  0.515000 (0.005000)  xy   1.93 x   0.28  im_Base_BEOL   
+  HBM_R2_BaseBEOL_05   z  0.510000 ..  0.515000 (0.005000)  xy   1.93 x   0.28  im_Base_BEOL   
+  Src_R2_TSV           z  0.510000 ..  0.515000 (0.005000)  xy   1.93 x  10.45  im_Base_BEOL   2.667 W
+  HBM_R2_BaseBEOL_06   z  0.510000 ..  0.515000 (0.005000)  xy   1.93 x   0.28  im_Base_BEOL   
+  HBM_R1_BaseBEOL_07   z  0.510000 ..  0.515000 (0.005000)  xy   4.52 x  11.00  im_Base_BEOL   
+  HBM_R2_BaseBEOL_07   z  0.510000 ..  0.515000 (0.005000)  xy   4.52 x  11.00  im_Base_BEOL   
+  GPU_FEOL             z  0.511715 ..  0.511865 (0.000150)  xy  30.00 x  22.00  im_FEOL        
+  BEOL_MXY_01          z  0.511865 ..  0.513265 (0.001400)  xy   0.20 x  22.00  im_BEOL_MXY    
+  BEOL_MXY_02          z  0.511865 ..  0.513265 (0.001400)  xy   1.50 x   2.50  im_BEOL_MXY    
+  Src_GPU_PHY_L        z  0.511865 ..  0.513265 (0.001400)  xy   1.50 x  17.00  im_BEOL_MXY    11.749 W
+  BEOL_MXY_03          z  0.511865 ..  0.513265 (0.001400)  xy   1.50 x   2.50  im_BEOL_MXY    
+  BEOL_MXY_04          z  0.511865 ..  0.513265 (0.001400)  xy   1.80 x  22.00  im_BEOL_MXY    
+  BEOL_MXY_05          z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   2.20  im_BEOL_MXY    
+  Src_GPU_R1_1         z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   7.70  im_BEOL_MXY    23.497 W
+  BEOL_MXY_06          z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   2.20  im_BEOL_MXY    
+  Src_GPU_R2_1         z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   7.70  im_BEOL_MXY    23.497 W
+  BEOL_MXY_07          z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   2.20  im_BEOL_MXY    
+  BEOL_MXY_08          z  0.511865 ..  0.513265 (0.001400)  xy   2.00 x  22.00  im_BEOL_MXY    
+  BEOL_MXY_09          z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   2.20  im_BEOL_MXY    
+  Src_GPU_R1_2         z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   7.70  im_BEOL_MXY    23.497 W
+  BEOL_MXY_10          z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   2.20  im_BEOL_MXY    
+  Src_GPU_R2_2         z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   7.70  im_BEOL_MXY    23.497 W
+  BEOL_MXY_11          z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   2.20  im_BEOL_MXY    
+  BEOL_MXY_12          z  0.511865 ..  0.513265 (0.001400)  xy   1.50 x  22.00  im_BEOL_MXY    
+  BEOL_MXY_13          z  0.511865 ..  0.513265 (0.001400)  xy   4.00 x   2.20  im_BEOL_MXY    
+  Src_GPU_R1_3         z  0.511865 ..  0.513265 (0.001400)  xy   4.00 x   7.70  im_BEOL_MXY    39.162 W
+  BEOL_MXY_14          z  0.511865 ..  0.513265 (0.001400)  xy   4.00 x   2.20  im_BEOL_MXY    
+  Src_GPU_R2_3         z  0.511865 ..  0.513265 (0.001400)  xy   4.00 x   7.70  im_BEOL_MXY    39.162 W
+  BEOL_MXY_15          z  0.511865 ..  0.513265 (0.001400)  xy   4.00 x   2.20  im_BEOL_MXY    
+  BEOL_MXY_16          z  0.511865 ..  0.513265 (0.001400)  xy   1.50 x  22.00  im_BEOL_MXY    
+  BEOL_MXY_17          z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   2.20  im_BEOL_MXY    
+  Src_GPU_R1_4         z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   7.70  im_BEOL_MXY    23.497 W
+  BEOL_MXY_18          z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   2.20  im_BEOL_MXY    
+  Src_GPU_R2_4         z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   7.70  im_BEOL_MXY    23.497 W
+  BEOL_MXY_19          z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   2.20  im_BEOL_MXY    
+  BEOL_MXY_20          z  0.511865 ..  0.513265 (0.001400)  xy   2.00 x  22.00  im_BEOL_MXY    
+  BEOL_MXY_21          z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   2.20  im_BEOL_MXY    
+  Src_GPU_R1_5         z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   7.70  im_BEOL_MXY    23.497 W
+  BEOL_MXY_22          z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   2.20  im_BEOL_MXY    
+  Src_GPU_R2_5         z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   7.70  im_BEOL_MXY    23.497 W
+  BEOL_MXY_23          z  0.511865 ..  0.513265 (0.001400)  xy   3.00 x   2.20  im_BEOL_MXY    
+  BEOL_MXY_24          z  0.511865 ..  0.513265 (0.001400)  xy   1.80 x  22.00  im_BEOL_MXY    
+  BEOL_MXY_25          z  0.511865 ..  0.513265 (0.001400)  xy   1.50 x   2.50  im_BEOL_MXY    
+  Src_GPU_PHY_R        z  0.511865 ..  0.513265 (0.001400)  xy   1.50 x  17.00  im_BEOL_MXY    11.749 W
+  BEOL_MXY_26          z  0.511865 ..  0.513265 (0.001400)  xy   1.50 x   2.50  im_BEOL_MXY    
+  BEOL_MXY_27          z  0.511865 ..  0.513265 (0.001400)  xy   0.20 x  22.00  im_BEOL_MXY    
+  BSPDN_Bond           z  0.513265 ..  0.513765 (0.000500)  xy  30.00 x  22.00  im_BSPDN_Bond  
+  GPU_Carrier          z  0.513765 ..  1.245000 (0.731235)  xy  30.00 x  22.00  im_Si          
+  HBM_L1_BaseSi        z  0.515000 ..  0.565000 (0.050000)  xy  11.00 x  11.00  im_Si          
+  HBM_L2_BaseSi        z  0.515000 ..  0.565000 (0.050000)  xy  11.00 x  11.00  im_Si          
+  HBM_R1_BaseSi        z  0.515000 ..  0.565000 (0.050000)  xy  11.00 x  11.00  im_Si          
+  HBM_R2_BaseSi        z  0.515000 ..  0.565000 (0.050000)  xy  11.00 x  11.00  im_Si          
+  Mold_11              z  0.565000 ..  1.245000 (0.680000)  xy   1.00 x  24.00  im_Mold        
+  Mold_12              z  0.565000 ..  1.245000 (0.680000)  xy  10.80 x   1.10  im_Mold        
+  HBM_L1_D01_uBump     z  0.565000 ..  0.580000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  Mold_13              z  0.565000 ..  1.245000 (0.680000)  xy  10.80 x   0.20  im_Mold        
+  HBM_L2_D01_uBump     z  0.565000 ..  0.580000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  Mold_14              z  0.565000 ..  1.245000 (0.680000)  xy  10.80 x   1.10  im_Mold        
+  Mold_15              z  0.565000 ..  1.245000 (0.680000)  xy   0.20 x  24.00  im_Mold        
+  Mold_16              z  0.565000 ..  1.245000 (0.680000)  xy  30.00 x   1.00  im_Mold        
+  Mold_17              z  0.565000 ..  1.245000 (0.680000)  xy  30.00 x   1.00  im_Mold        
+  Mold_18              z  0.565000 ..  1.245000 (0.680000)  xy   0.20 x  24.00  im_Mold        
+  Mold_19              z  0.565000 ..  1.245000 (0.680000)  xy  10.80 x   1.10  im_Mold        
+  HBM_R1_D01_uBump     z  0.565000 ..  0.580000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  Mold_20              z  0.565000 ..  1.245000 (0.680000)  xy  10.80 x   0.20  im_Mold        
+  HBM_R2_D01_uBump     z  0.565000 ..  0.580000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  Mold_21              z  0.565000 ..  1.245000 (0.680000)  xy  10.80 x   1.10  im_Mold        
+  Mold_22              z  0.565000 ..  1.245000 (0.680000)  xy   1.00 x  24.00  im_Mold        
+  HBM_L1_D01_BEOL      z  0.580000 ..  0.583000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_L2_D01_BEOL      z  0.580000 ..  0.583000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_R1_D01_BEOL      z  0.580000 ..  0.583000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_R2_D01_BEOL      z  0.580000 ..  0.583000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_L1_D01_Si        z  0.583000 ..  0.611000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_L2_D01_Si        z  0.583000 ..  0.611000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_R1_D01_Si        z  0.583000 ..  0.611000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_R2_D01_Si        z  0.583000 ..  0.611000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_L1_D02_uBump     z  0.611000 ..  0.626000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_L2_D02_uBump     z  0.611000 ..  0.626000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_R1_D02_uBump     z  0.611000 ..  0.626000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_R2_D02_uBump     z  0.611000 ..  0.626000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_L1_D02_BEOL      z  0.626000 ..  0.629000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_L2_D02_BEOL      z  0.626000 ..  0.629000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_R1_D02_BEOL      z  0.626000 ..  0.629000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_R2_D02_BEOL      z  0.626000 ..  0.629000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_L1_D02_Si        z  0.629000 ..  0.657000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_L2_D02_Si        z  0.629000 ..  0.657000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_R1_D02_Si        z  0.629000 ..  0.657000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_R2_D02_Si        z  0.629000 ..  0.657000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_L1_D03_uBump     z  0.657000 ..  0.672000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_L2_D03_uBump     z  0.657000 ..  0.672000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_R1_D03_uBump     z  0.657000 ..  0.672000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_R2_D03_uBump     z  0.657000 ..  0.672000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_L1_D03_BEOL      z  0.672000 ..  0.675000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_L2_D03_BEOL      z  0.672000 ..  0.675000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_R1_D03_BEOL      z  0.672000 ..  0.675000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_R2_D03_BEOL      z  0.672000 ..  0.675000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_L1_D03_Si        z  0.675000 ..  0.703000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_L2_D03_Si        z  0.675000 ..  0.703000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_R1_D03_Si        z  0.675000 ..  0.703000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_R2_D03_Si        z  0.675000 ..  0.703000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_L1_D04_uBump     z  0.703000 ..  0.718000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_L2_D04_uBump     z  0.703000 ..  0.718000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_R1_D04_uBump     z  0.703000 ..  0.718000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_R2_D04_uBump     z  0.703000 ..  0.718000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_L1_D04_BEOL      z  0.718000 ..  0.721000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_L2_D04_BEOL      z  0.718000 ..  0.721000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_R1_D04_BEOL      z  0.718000 ..  0.721000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_R2_D04_BEOL      z  0.718000 ..  0.721000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_L1_D04_Si        z  0.721000 ..  0.749000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_L2_D04_Si        z  0.721000 ..  0.749000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_R1_D04_Si        z  0.721000 ..  0.749000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_R2_D04_Si        z  0.721000 ..  0.749000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_L1_D05_uBump     z  0.749000 ..  0.764000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_L2_D05_uBump     z  0.749000 ..  0.764000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_R1_D05_uBump     z  0.749000 ..  0.764000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_R2_D05_uBump     z  0.749000 ..  0.764000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_L1_D05_BEOL      z  0.764000 ..  0.767000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_L2_D05_BEOL      z  0.764000 ..  0.767000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_R1_D05_BEOL      z  0.764000 ..  0.767000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_R2_D05_BEOL      z  0.764000 ..  0.767000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_L1_D05_Si        z  0.767000 ..  0.795000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_L2_D05_Si        z  0.767000 ..  0.795000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_R1_D05_Si        z  0.767000 ..  0.795000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_R2_D05_Si        z  0.767000 ..  0.795000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_L1_D06_uBump     z  0.795000 ..  0.810000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_L2_D06_uBump     z  0.795000 ..  0.810000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_R1_D06_uBump     z  0.795000 ..  0.810000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_R2_D06_uBump     z  0.795000 ..  0.810000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_L1_D06_BEOL      z  0.810000 ..  0.813000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_L2_D06_BEOL      z  0.810000 ..  0.813000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_R1_D06_BEOL      z  0.810000 ..  0.813000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_R2_D06_BEOL      z  0.810000 ..  0.813000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_L1_D06_Si        z  0.813000 ..  0.841000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_L2_D06_Si        z  0.813000 ..  0.841000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_R1_D06_Si        z  0.813000 ..  0.841000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_R2_D06_Si        z  0.813000 ..  0.841000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_L1_D07_uBump     z  0.841000 ..  0.856000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_L2_D07_uBump     z  0.841000 ..  0.856000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_R1_D07_uBump     z  0.841000 ..  0.856000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_R2_D07_uBump     z  0.841000 ..  0.856000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_L1_D07_BEOL      z  0.856000 ..  0.859000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_L2_D07_BEOL      z  0.856000 ..  0.859000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_R1_D07_BEOL      z  0.856000 ..  0.859000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_R2_D07_BEOL      z  0.856000 ..  0.859000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_L1_D07_Si        z  0.859000 ..  0.887000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_L2_D07_Si        z  0.859000 ..  0.887000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_R1_D07_Si        z  0.859000 ..  0.887000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_R2_D07_Si        z  0.859000 ..  0.887000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_L1_D08_uBump     z  0.887000 ..  0.902000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_L2_D08_uBump     z  0.887000 ..  0.902000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_R1_D08_uBump     z  0.887000 ..  0.902000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_R2_D08_uBump     z  0.887000 ..  0.902000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_L1_D08_BEOL      z  0.902000 ..  0.905000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_L2_D08_BEOL      z  0.902000 ..  0.905000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_R1_D08_BEOL      z  0.902000 ..  0.905000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_R2_D08_BEOL      z  0.902000 ..  0.905000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_L1_D08_Si        z  0.905000 ..  0.933000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_L2_D08_Si        z  0.905000 ..  0.933000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_R1_D08_Si        z  0.905000 ..  0.933000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_R2_D08_Si        z  0.905000 ..  0.933000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_L1_D09_uBump     z  0.933000 ..  0.948000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_L2_D09_uBump     z  0.933000 ..  0.948000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_R1_D09_uBump     z  0.933000 ..  0.948000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_R2_D09_uBump     z  0.933000 ..  0.948000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_L1_D09_BEOL      z  0.948000 ..  0.951000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_L2_D09_BEOL      z  0.948000 ..  0.951000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_R1_D09_BEOL      z  0.948000 ..  0.951000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_R2_D09_BEOL      z  0.948000 ..  0.951000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_L1_D09_Si        z  0.951000 ..  0.979000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_L2_D09_Si        z  0.951000 ..  0.979000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_R1_D09_Si        z  0.951000 ..  0.979000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_R2_D09_Si        z  0.951000 ..  0.979000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_L1_D10_uBump     z  0.979000 ..  0.994000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_L2_D10_uBump     z  0.979000 ..  0.994000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_R1_D10_uBump     z  0.979000 ..  0.994000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_R2_D10_uBump     z  0.979000 ..  0.994000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_L1_D10_BEOL      z  0.994000 ..  0.997000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_L2_D10_BEOL      z  0.994000 ..  0.997000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_R1_D10_BEOL      z  0.994000 ..  0.997000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_R2_D10_BEOL      z  0.994000 ..  0.997000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_L1_D10_Si        z  0.997000 ..  1.025000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_L2_D10_Si        z  0.997000 ..  1.025000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_R1_D10_Si        z  0.997000 ..  1.025000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_R2_D10_Si        z  0.997000 ..  1.025000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_L1_D11_uBump     z  1.025000 ..  1.040000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_L2_D11_uBump     z  1.025000 ..  1.040000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_R1_D11_uBump     z  1.025000 ..  1.040000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_R2_D11_uBump     z  1.025000 ..  1.040000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_L1_D11_BEOL      z  1.040000 ..  1.043000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_L2_D11_BEOL      z  1.040000 ..  1.043000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_R1_D11_BEOL      z  1.040000 ..  1.043000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_R2_D11_BEOL      z  1.040000 ..  1.043000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_L1_D11_Si        z  1.043000 ..  1.071000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_L2_D11_Si        z  1.043000 ..  1.071000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_R1_D11_Si        z  1.043000 ..  1.071000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_R2_D11_Si        z  1.043000 ..  1.071000 (0.028000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_L1_D12_uBump     z  1.071000 ..  1.086000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_L2_D12_uBump     z  1.071000 ..  1.086000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_R1_D12_uBump     z  1.071000 ..  1.086000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_R2_D12_uBump     z  1.071000 ..  1.086000 (0.015000)  xy  10.80 x  10.80  im_uBump       
+  HBM_L1_D12_BEOL      z  1.086000 ..  1.089000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_L2_D12_BEOL      z  1.086000 ..  1.089000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_R1_D12_BEOL      z  1.086000 ..  1.089000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_R2_D12_BEOL      z  1.086000 ..  1.089000 (0.003000)  xy  10.80 x  10.80  im_DRAM_BEOL   
+  HBM_L1_D12_Si        z  1.089000 ..  1.245000 (0.156000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_L2_D12_Si        z  1.089000 ..  1.245000 (0.156000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_R1_D12_Si        z  1.089000 ..  1.245000 (0.156000)  xy  10.80 x  10.80  im_Si          2.667 W
+  HBM_R2_D12_Si        z  1.089000 ..  1.245000 (0.156000)  xy  10.80 x  10.80  im_Si          2.667 W
+  TIM                  z  1.245000 ..  1.445000 (0.200000)  xy  54.00 x  24.00  im_TIM         
+  Lid                  z  1.445000 ..  4.445000 (3.000000)  xy  65.00 x  65.00  im_Lid         
+
+MANUAL (AEDT refused these, do them by hand):
+  Mesh sub-region on MeshBox_Die   [AEDT: 'ADispatchWrapper' object has no attribute 'CreateSubregion']
