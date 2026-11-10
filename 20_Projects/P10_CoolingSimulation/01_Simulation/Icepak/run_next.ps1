@@ -1,7 +1,13 @@
-# run_next.ps1 — Phase 2: lid vs lidless at BG=0.39 (paper-anchored).
+# run_next.ps1 — Re-validate corrected power map (NVLink removed, HBM PHY kept).
 # Works under the repo Icepak folder; outputs to Icepak\Runs\Run_XXX.
-#   Run_010_Lidded_BG39  : validated baseline, background 0.39 -> expect ~69.1 C
-#   Run_011_Lidless_BG39 : lid removed (LIDLESS), HTC on TIM top, same BG
+#   Run_012_Lidded_BG50  : Phase 1 bracket low  (expect ~66.5 C, was 66.55)
+#   Run_013_Lidded_BG30  : Phase 1 bracket high (expect ~71.1 C, was 71.08)
+#   Run_014_Lidded_BG39  : Phase 2 lidded, paper-anchored (expect ~69.1 C)
+#   Run_015_Lidless_BG39 : Phase 2 lidless (LIDLESS, HTC on TIM top), same BG
+# Power map corrected 2026-11-10: edge I/O is GPU-side HBM PHY on the HBM-facing
+# (+-x) edges; the mislabeled "NVLink" and the extra top/bottom strips are gone.
+# Distribution is back to GPC 16.78 W x8 / NV-HBI 27.97 W x2 / PHY 8.39 W x2, so
+# results should match the earlier validated baseline within solver noise.
 # NOTE: ansysedt -ng returns immediately (non-blocking) under a .bat, so we
 #       launch each driver then WAIT for its done-file and for the .aedt lock
 #       to release before the next step. Otherwise solve/post race the build.
@@ -89,6 +95,8 @@ function Stage-And-Run([string]$name, [string]$bg, [bool]$lidless) {
   }
 }
 
-Stage-And-Run 'Run_010_Lidded_BG39'  '0.39' $false
-Stage-And-Run 'Run_011_Lidless_BG39' '0.39' $true
+Stage-And-Run 'Run_012_Lidded_BG50'  '0.50' $false
+Stage-And-Run 'Run_013_Lidded_BG30'  '0.30' $false
+Stage-And-Run 'Run_014_Lidded_BG39'  '0.39' $false
+Stage-And-Run 'Run_015_Lidless_BG39' '0.39' $true
 Write-Host "===== ALL DONE $(Get-Date -Format HH:mm:ss) ====="
