@@ -150,8 +150,14 @@ PHY_FACE = "gpu"
 
 #  GPU: 배경(BSPDN) + BEOL_MXY 층의 블록들
 #    핫스팟 10개 = 2행 x [GPC, GPC, NV-HBI, GPC, GPC]  (Blackwell 다이어그램의
-#    초록 GPC 와 보라 NV-HBI 를 본뜬 것),  양쪽 가장자리에 NVLink 2개 (주황).
-#    핫스팟 몫 P_GPU*(1-GPU_BG_FRAC) 를 아래 전력 비(W)로 12개가 나눠 갖는다.
+#    초록 GPC 와 보라 NV-HBI 를 본뜬 것).
+#    edge I/O: HBM 이 GPU 좌·우(±x)에 붙으므로 GPU-측 HBM PHY 는 좌·우 edge
+#    (HBM 마주보는 면)에, NVLink(GPU-GPU 연결)는 위·아래 edge(±y, HBM 없는 면)에 둔다.
+#    [2026-11-10 교정] 이전엔 NVLink 를 HBM 쪽 좌·우 edge 에 뒀는데, 논문 본문
+#    "HBM interfaces block two sides of each GPU and prevent additional
+#    GPU-to-GPU connections" 와 상충 → NVLink 를 HBM 없는 면으로 옮기고 HBM 쪽
+#    edge 엔 (물리적으로 맞는) GPU-측 HBM PHY 를 둔다.  발열맵은 [추론] (논문 비공개).
+#    핫스팟 몫 P_GPU*(1-GPU_BG_FRAC) 를 아래 전력 비(W)로 14개가 나눠 갖는다.
 GPU_BG_FRAC     = 0.5                # 414 W 중 BSPDN 층에 균일하게 까는 몫
 GPU_ROWS_Y      = (0.275, 0.725)     # 행 중심, GPU 세로(22 mm)를 1 로.
                                      #  7.7 mm 두 행이 2.2 mm 씩 띄고 들어간다:
@@ -161,9 +167,11 @@ GPU_BLOB_BIG    = (4.0, 7.7)         # 가운데 NV-HBI (x, y) mm  (5 -> 4, 요�
 GPU_BLOB_SMALL  = (3.0, 7.7)         # GPC.  y 7.7 (요청)
 GPU_BLOB_DENS   = (1, 1, 1.25, 1, 1) # 전력밀도 비 (한 행, 바깥 -> 가운데 -> 바깥).
                                      #  전력 = 밀도 x 면적 이라 크기를 바꿔도 밀도 비가 유지된다
-GPU_NVLINK_SIZE = (2.0, 19.8)        # 양쪽 NVLink (x, y) mm, 세로로 길쭉하게
-GPU_NVLINK_EDGE = 0.5                # GPU 가장자리에서 띄우는 양 (mm)
-GPU_NVLINK_W    = 0.5                # 전력 비: 밀도 1 인 옆 핫스팟(GPC) 하나의 절반
+GPU_PHY_SIZE    = (1.5, 17.0)        # GPU-측 HBM PHY: 좌·우 edge 세로 스트립 (x,y) mm [추론]
+GPU_PHY_W       = 0.5                # PHY 전력 비: 밀도 1 인 작은 핫스팟(GPC)의 절반
+GPU_NVLINK_SIZE = (25.0, 1.8)        # NVLink: 위·아래 edge 가로 스트립 (x,y) mm [추론]
+GPU_NVLINK_EDGE = 0.2                # GPU 가장자리에서 띄우는 양 (mm)
+GPU_NVLINK_W    = 0.5                # NVLink 전력 비: 밀도 1 인 작은 핫스팟의 절반
 
 #  냉각  [S]
 H_TOP    = 30000.0
@@ -406,9 +414,10 @@ def sources(L):
             S("Src_%s_%s" % (tag, nm), xb + rx0 * BASE_W, yb + ry0 * BASE_H,
               (rx1 - rx0) * BASE_W, (ry1 - ry0) * BASE_H, pw, "HBM_%s_BaseBEOL" % tag, "src_base")
 
-    # GPU: 핫스팟 2행 x 5개 + NVLink 2개, 전부 BEOL_MXY 층에.
-    #  핫스팟 몫 p_hot 을 가중치로 나눈다.  핫스팟 가중치 = 밀도비 x 면적,
-    #  NVLink 가중치 = GPU_NVLINK_W x (밀도 1 인 작은 핫스팟의 가중치).
+    # GPU: 핫스팟 2행 x 5개(compute) + HBM PHY 2개(좌·우 edge, HBM 마주봄)
+    #  + NVLink 2개(위·아래 edge, HBM 없는 면), 전부 BEOL_MXY 층에.
+    #  핫스팟 몫 p_hot 을 가중치로 나눈다.  compute 가중치 = 밀도비 x 면적,
+    #  edge(PHY/NVLink) 가중치 = 비율 x (밀도 1 인 작은 핫스팟의 가중치).
     p_hot = P_GPU * (1.0 - GPU_BG_FRAC)
     nb = len(GPU_BLOB_DENS)
     blobs = []
@@ -421,15 +430,24 @@ def sources(L):
             blobs.append(("Src_GPU_R%d_%d" % (r + 1, k + 1), xc - w / 2.0, yc - h / 2.0,
                           w, h, dens * w * h))
     w_small = GPU_BLOB_SMALL[0] * GPU_BLOB_SMALL[1]          # 밀도 1 x 작은 면적
+    w_phy = GPU_PHY_W * w_small
     w_nvl = GPU_NVLINK_W * w_small
-    wsum = sum([b[5] for b in blobs]) + 2 * w_nvl
+    wsum = sum([b[5] for b in blobs]) + 2 * w_phy + 2 * w_nvl
     for nm, x, y, w, h, wt in blobs:
         S(nm, x, y, w, h, p_hot * wt / wsum, "BEOL_MXY", "src_gpu")
+    # GPU-측 HBM PHY: 좌·우 edge 세로 스트립 (HBM 을 마주보는 ±x 면)
+    pw_x, pw_y = GPU_PHY_SIZE
+    yp = L["yg"] + (GPU_H - pw_y) / 2.0
+    S("Src_GPU_PHY_L", L["xg"] + GPU_NVLINK_EDGE, yp, pw_x, pw_y,
+      p_hot * w_phy / wsum, "BEOL_MXY", "src_gpu")
+    S("Src_GPU_PHY_R", L["xg"] + GPU_W - GPU_NVLINK_EDGE - pw_x, yp, pw_x, pw_y,
+      p_hot * w_phy / wsum, "BEOL_MXY", "src_gpu")
+    # NVLink: 위·아래 edge 가로 스트립 (HBM 없는 ±y 면)
     nw, nh = GPU_NVLINK_SIZE
-    yn = L["yg"] + (GPU_H - nh) / 2.0
-    S("Src_GPU_NVL_L", L["xg"] + GPU_NVLINK_EDGE, yn, nw, nh,
+    xn = L["xg"] + (GPU_W - nw) / 2.0
+    S("Src_GPU_NVL_B", xn, L["yg"] + GPU_NVLINK_EDGE, nw, nh,
       p_hot * w_nvl / wsum, "BEOL_MXY", "src_gpu")
-    S("Src_GPU_NVL_R", L["xg"] + GPU_W - GPU_NVLINK_EDGE - nw, yn, nw, nh,
+    S("Src_GPU_NVL_T", xn, L["yg"] + GPU_H - GPU_NVLINK_EDGE - nh, nw, nh,
       p_hot * w_nvl / wsum, "BEOL_MXY", "src_gpu")
     return out
 
@@ -771,7 +789,7 @@ def report_lines(boxes, L, warns):
            % (len(boxes), len(powered), total_power(boxes),
               "  (whole module %.1f W)" % (P_GPU + 4 * P_HBM) if SYMMETRY == "quarter" else ""),
            "  GPU %.0f W = %.1f W uniform in BSPDN + BEOL_MXY blocks (%.1f W): %d hotspots with "
-           "power-density ratio %s per row + 2 NVLink at %.2g x a small hotspot"
+           "power-density ratio %s per row + 2 HBM-PHY (+-x) + 2 NVLink (+-y) each at %.2g x a small hotspot"
            % (P_GPU, P_GPU * GPU_BG_FRAC, P_GPU * (1 - GPU_BG_FRAC),
               len(GPU_BLOB_DENS) * len(GPU_ROWS_Y),
               ":".join(["%g" % d for d in GPU_BLOB_DENS]), GPU_NVLINK_W),

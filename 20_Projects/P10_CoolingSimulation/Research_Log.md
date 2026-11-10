@@ -7,6 +7,8 @@
 | 2026-11-09 | 스택업 수치 대조 | `hbm_gpu_2p5d.py` 상수 vs 논문 Fig.2(c) 표 | 층 두께·k·경계·전력총량 일치. 의도적 차이: DRAM hybrid bonding→microbump 15µm. 미해결: GPU 32×20(논문 본문) vs 30×22(모델, Fig.2a) | 검증 solve |
 | 2026-11-09 | 베이스라인 논문 재현 검증 | Run_008(BG50%)·Run_009(BG30%), converged 메시 0.25mm, 원격 AEDT 배치 | GPU peak 66.55°C / 71.08°C → 논문 69.1°C를 브라켓. 보간 BG≈39%에서 69.1°C. 갭은 비공개 전력맵 가정으로 설명됨 | Phase 2 (lid vs lidless) 설계 |
 | 2026-11-09 | Phase 2: lid vs lidless 러프 비교 | BG39 고정, converged, lidded(=베이스라인) vs lidless(방식 b: lid 제거·TIM 상면에 직접 HTC), 원격 배치 | Lidded GPU 69.0°C(=논문 69.1 안착) vs Lidless 74.3°C → **Δ+5.2°C**. HBM base 56.0↔56.8(+0.7). 현 칩 크기선 lid가 냉각에 유리 | Phase 3 (면적·두께 sweep) |
+| 2026-11-10 | GPU 발열맵 교정: NVLink 위치 | 형준님이 모델 검토 중 발견 — NVLink를 HBM 쪽(좌·우 ±x) edge에 뒀던 게 논문 본문 "HBM blocks two sides→GPU-GPU 연결 불가"와 상충. NVLink를 HBM 없는 면(위·아래 ±y)으로 이동, HBM 쪽 edge엔 GPU-측 HBM PHY 배치 [추론] | 소스 14개 겹침0·경계이탈0 검증. peak 위치는 NV-HBI 유지. **Phase 1·2 재실행 필요**(발열맵 변경) | 재실행 후 Phase 1/2 수치 갱신 |
+| 2026-11-10 | HIR 2025 Thermal 챕터 참고 추가 | HIR Ch.20 Thermal(56쪽) 발췌 [B] | h=30000→~150 W/cm², 액냉/제트/마이크로채널 구간 정합 확인. HBM 40W는 보수적(최신 60W+). GPU 국소 flux 우리 맵이 추세(>4 W/mm²)보다 완만. `References/HIR_Thermal_2025_notes.md` | Phase 3/4에 HBM 60W·Tjmax 한계선 반영 |
 
 ---
 
@@ -53,3 +55,17 @@
 2. **Phase 2 답**: 현재 칩 크기(GPU 30×22mm, ~660mm²)에선 **힛스프레더가 냉각에 유리**(제거 시 GPU +5.2°C). 지도교수 가설(대형 가속기 lidless 유리)은 이 크기에선 성립하지 않으며, 역전 지점은 Phase 5 칩 크기 sweep에서 검증 대상.
 
 **한계·주의:** (a) lidless는 방식 (b)라 확산·면적 효과가 섞임 — "확산만의 기여"는 방식 (a)로 별도 확인 필요. (b) post에서 `ExportMeshStats/ExportConvergence`는 이 AEDT 빌드에 없어 실패(결과 무관). (c) lidless의 geometry.csv에 유령 "Lid" 행(nan)이 남아 object_temperatures.csv에 nan 1행 — GPU/HBM 산출엔 영향 없음(그룹 필터), 추후 per-run geometry.csv 재생성으로 정리 예정.
+
+> **[2026-11-10 중요] 위 Phase 1·2 수치는 구(舊) 발열맵(NVLink를 HBM 쪽 edge에 둔 버전) 기준.**
+> GPU 발열맵을 교정(NVLink→HBM 없는 면, HBM 쪽 edge에 GPU-측 PHY)했으므로 Run_008~011을
+> **재실행해 수치를 갱신해야 함.** peak 위치(NV-HBI)·총전력은 불변이라 69.1°C 앵커(BG≈39%)는
+> 비슷할 것으로 예상하나, 핫스팟 공간분포가 바뀌어 GPU peak·HBM base가 소폭 달라질 수 있음.
+> 재실행 전까지 Phase 1·2 결론(검증 정합, lid 유리 Δ+5.2°C)은 **잠정값**으로 취급.
+
+---
+
+## 참고자료 (2026-11-10 추가)
+- `References/HIR_Thermal_2025_notes.md` — HIR 2025 Thermal 챕터 [B] 발췌. 핵심: ①콜드플레이트
+  h=30000(≈150 W/cm²)이 액냉/제트/마이크로채널 실존 한계 구간에 정합 → 상단 경계 타당성 보강,
+  ②HBM 40 W/스택은 보수적(최신 60 W+), ③우리 GPU 국소 heat flux는 업계 추세(>4 W/mm²)보다
+  완만(핫스팟 보수적), ④Phase 4 한계선 후보: 핫스팟 >100°C, HBM Tjmax ~95–105°C.
